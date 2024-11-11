@@ -4,6 +4,9 @@ export const rootStyles = css`
     :root {
         --color-primary: #00a86b;
         --color-secondary: #fffdd0;
+        --color-darkgray: #767676;
+        --color-gray: #d8d8d8;
+        --color-lightgray: #ededed;
 
         --font-size-s: 16px;
         --font-size-m: 20px;
