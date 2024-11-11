@@ -8,6 +8,7 @@ export const rootStyles = css`
         --color-gray: #d8d8d8;
         --color-lightgray: #ededed;
 
+        --font-size-xs: 10px;
         --font-size-s: 16px;
         --font-size-m: 20px;
         --font-size-l: 24px;

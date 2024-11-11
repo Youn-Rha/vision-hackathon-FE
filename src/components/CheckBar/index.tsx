@@ -21,10 +21,10 @@ export const CheckBar = ({ value = 50 }: CheckBarProps) => {
         <Styles.Container>
             <Styles.Slider type="range" value={currentValue} min={0} max={100} onChange={handleSliderChange} />
             <Styles.TextContainer>
-                <Text size="s" color="gray">
+                <Text size="xs" color="gray">
                     아니다
                 </Text>
-                <Text size="s" color="gray">
+                <Text size="xs" color="gray">
                     그렇다
                 </Text>
             </Styles.TextContainer>
