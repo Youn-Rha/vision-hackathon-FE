@@ -1,3 +1,4 @@
+import { Text } from "../Text";
 import * as Styles from "./index.style";
 
 export interface GrowBarProps {
@@ -10,6 +11,7 @@ export const GrowBar = ({experience = 30}: GrowBarProps) => {
             <Styles.Wrapper>
                 <Styles.Bar experience={experience}></Styles.Bar>
             </Styles.Wrapper>
+            <Text size="s" weight="bold" color="black">{experience}%</Text>
         </Styles.Container>
     );
 };

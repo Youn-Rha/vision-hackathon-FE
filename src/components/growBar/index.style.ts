@@ -4,6 +4,8 @@ import { GrowBarProps } from ".";
 export const Container = styled.div`
     width: 230px;
     height: 30px;
+    align-items: center;
+    gap: 10px;
     display: flex;
 `;
 
