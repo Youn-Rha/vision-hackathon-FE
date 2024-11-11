@@ -10,7 +10,7 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
     width: 180px;
     height: 30px;
-    background-color: #ededed;
+    background-color: var(--color-lightgray);
     border-radius: 19px;
 `;
 
