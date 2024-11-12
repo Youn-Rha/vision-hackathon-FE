@@ -57,6 +57,8 @@ export const ButtonElement = styled.button<ButtonProps>`
 
     border: 0;
 
+    font-weight: bold;
+
     &:hover {
         cursor: pointer;
     }
