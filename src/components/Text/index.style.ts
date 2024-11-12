@@ -13,6 +13,8 @@ export const TextElement = styled.span<TextProps>`
                 return "var(--font-size-m)";
             case "s":
                 return "var(--font-size-s)";
+            case "xs":
+                return "var(--font-size-xs)";
             default:
                 return props.size;
         }

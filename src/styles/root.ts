@@ -10,6 +10,7 @@ export const rootStyles = css`
         --color-white: #ffffff;
         --color-black: #000000;
 
+        --font-size-xs: 10px;
         --font-size-s: 16px;
         --font-size-m: 20px;
         --font-size-l: 24px;
