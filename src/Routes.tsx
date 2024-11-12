@@ -2,7 +2,8 @@ import { Route, Routes } from "react-router-dom";
 
 import { Global } from "@emotion/react";
 
-import { Login } from "@/pages/Login";
+import { CharacterSettingPage } from "@/pages/CharacterSettingPage";
+import { LoginPage } from "@/pages/LoginPage";
 
 import { resetStyles } from "@/styles/reset";
 import { rootStyles } from "@/styles/root";
@@ -15,7 +16,8 @@ export const Router = () => {
             <Global styles={[resetStyles, rootStyles]} />
             <Routes>
                 <Route path="/" element={<RootLayout />}>
-                    <Route path="/login" element={<Login />}></Route>
+                    <Route path="/login" element={<LoginPage />}></Route>
+                    <Route path="/character/setting" element={<CharacterSettingPage />}></Route>
                 </Route>
             </Routes>
         </>
