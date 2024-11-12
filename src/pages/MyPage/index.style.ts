@@ -10,6 +10,20 @@ export const Container = styled.div`
     gap: 90px;
 `;
 
+export const Button = styled.button<{ size: string; color: string }>`
+    font-size: ${(props) => props.size};
+    font-weight: bold;
+    background-color: var(--color-white);
+    color: ${(props) => {
+        switch (props.color) {
+            case "black":
+                return "var(--color-black)";
+            case "gray":
+                return "var(--color-gray)";
+        }
+    }};
+`;
+
 export const TextContainer = styled.div`
     display: flex;
     flex-direction: column;

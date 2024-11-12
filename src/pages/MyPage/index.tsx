@@ -4,6 +4,7 @@ import { PageBar } from "../../components/PageBar";
 import { Text } from "../../components/Text";
 import Character from "../../assets/react.svg";
 import * as Styles from "./index.style";
+import { Button } from "../../components/Button";
 
 export const MyPage = () => {
     const [name, setName] = useState<string>("이름");
@@ -44,16 +45,16 @@ export const MyPage = () => {
                 )}
             </Styles.TextContainer>
             <Styles.TextContainer>
-                <Text size="m" weight="bold">기록 캘린더 보기</Text>
+                <Styles.Button size="20px" color="black">기록 캘린더 보기</Styles.Button>
                 <Styles.Divider />
-                <Text size="m" weight="bold">자가 문진표 확인</Text>
+                <Styles.Button size="20px" color="black">자가 문진표 확인</Styles.Button>
                 <Styles.Divider />
-                <Text size="m" weight="bold">진단 결과 확인</Text>
+                <Styles.Button size="20px" color="black">진단 결과 확인</Styles.Button>
             </Styles.TextContainer>
             <Styles.TextContainer>
-                <Text size="s" weight="bold">로그아웃</Text>
-                <Text />
-                <Text size="s" weight="bold" color="lightgray">회원 탈퇴</Text>
+                <Styles.Button size="16px" color="black">로그아웃</Styles.Button>
+                <div/>
+                <Styles.Button size="16px" color="gray">회원 탈퇴</Styles.Button>
             </Styles.TextContainer>
         </Styles.Container>
     );
