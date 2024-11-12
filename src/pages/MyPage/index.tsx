@@ -1,43 +1,59 @@
+import { useState, useEffect } from "react";
 import { CharacterBG } from "../../components/CharacterBG";
 import { PageBar } from "../../components/PageBar";
 import { Text } from "../../components/Text";
-import Character from "../../assets/react.svg"
+import Character from "../../assets/react.svg";
 import * as Styles from "./index.style";
 
 export const MyPage = () => {
+    const [name, setName] = useState<string>("이름");
+    const [email, setEmail] = useState<string>("example@co.kr");
+    const [loading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        // API 요청 함수 정의
+        const fetchUserData = async () => {
+            try {
+                // API 호출 (예시 URL 사용)
+                const response = await fetch("/api/user");
+                const data = await response.json();
+                // 받아온 데이터로 상태 업데이트
+                setName(data.name || "이름 없음");
+                setEmail(data.email || "이메일 없음");
+            } catch (error) {
+                console.error("Failed to fetch user data:", error);
+            } finally {
+                setLoading(false); // 로딩 상태 종료
+            }
+        };
+        fetchUserData(); // 데이터 불러오기 함수 호출
+    }, []);
+
     return (
         <Styles.Container>
             <PageBar pagename="마이페이지" />
             <CharacterBG width="176px" height="176px" imageUrl={Character} />
             <Styles.TextContainer>
-                <Text size="m" weight="bold">
-                    이름
-                </Text>
-                <Text size="m" weight="bold">
-                    example@co.kr
-                </Text>
+                {loading ? (
+                    <Text size="m" weight="bold">로딩 중...</Text>
+                ) : (
+                    <>
+                        <Text size="m" weight="bold">{name}</Text>
+                        <Text size="m" weight="bold">{email}</Text>
+                    </>
+                )}
             </Styles.TextContainer>
             <Styles.TextContainer>
-                <Text size="m" weight="bold">
-                    기록 캘린더 보기
-                </Text>
+                <Text size="m" weight="bold">기록 캘린더 보기</Text>
                 <Styles.Divider />
-                <Text size="m" weight="bold">
-                    자가 문진표 확인
-                </Text>
+                <Text size="m" weight="bold">자가 문진표 확인</Text>
                 <Styles.Divider />
-                <Text size="m" weight="bold">
-                    진단 결과 확인
-                </Text>
+                <Text size="m" weight="bold">진단 결과 확인</Text>
             </Styles.TextContainer>
             <Styles.TextContainer>
-                <Text size="s" weight="bold">
-                    로그아웃
-                </Text>
+                <Text size="s" weight="bold">로그아웃</Text>
                 <Text />
-                <Text size="s" weight="bold" color="lightgray">
-                    회원 탈퇴
-                </Text>
+                <Text size="s" weight="bold" color="lightgray">회원 탈퇴</Text>
             </Styles.TextContainer>
         </Styles.Container>
     );
