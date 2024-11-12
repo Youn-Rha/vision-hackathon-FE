@@ -10,6 +10,7 @@ import { rootStyles } from "@/styles/root";
 
 import { CharacterStartPage } from "./pages/CharacterStartPage";
 import { RootLayout } from "@/layouts/RootLayout";
+import { MyPage } from "./pages/MyPage";
 
 export const Router = () => {
     return (
@@ -19,7 +20,9 @@ export const Router = () => {
                 <Route path="/" element={<RootLayout />}>
                     <Route path="/login" element={<LoginPage />}></Route>
                     <Route path="/character/setting" element={<CharacterSettingPage />}></Route>
+
                     <Route path="/character/start" element={<CharacterStartPage />}></Route>
+                    <Route path="/mypage" element={<MyPage />}></Route>
                 </Route>
             </Routes>
         </>
