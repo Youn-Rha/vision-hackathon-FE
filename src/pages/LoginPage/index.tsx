@@ -4,7 +4,7 @@ import { Text } from "@/components/Text";
 
 import * as Styles from "./index.style";
 
-export const Login = () => {
+export const LoginPage = () => {
     return (
         <Styles.Container>
             <Styles.TextContainer>
