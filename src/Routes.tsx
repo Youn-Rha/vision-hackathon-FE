@@ -19,7 +19,7 @@ export const Router = () => {
                 <Route path="/" element={<RootLayout />}>
                     <Route path="/login" element={<LoginPage />}></Route>
                     <Route path="/character/setting" element={<CharacterSettingPage />}></Route>
-                    <Route path="/checkstart" element={<CheckStartPage />}></Route>
+                    <Route path="/check/start" element={<CheckStartPage />}></Route>
                 </Route>
             </Routes>
         </>
