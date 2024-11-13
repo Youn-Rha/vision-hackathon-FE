@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const ChatContainer = styled.div`
     width: fit-content;
     display: flex;
-    
+
     position: relative;
 `;
 

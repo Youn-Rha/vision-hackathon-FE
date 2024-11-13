@@ -11,6 +11,7 @@ import { rootStyles } from "@/styles/root";
 
 import { CharacterPage } from "./pages/CharacterPage";
 import { CharacterStartPage } from "./pages/CharacterStartPage";
+import { ChatPage } from "./pages/ChatPage";
 import { CheckEndPage } from "./pages/CheckEndPage";
 import { CheckPage } from "./pages/CheckPage";
 import { CheckStartPage } from "./pages/CheckStartPage";
@@ -41,12 +42,17 @@ export const Router = () => {
                     <Route path="/mypage" element={<MyPage />}></Route>
 
                     <Route path="/memo" element={<MemoPage />}></Route>
+                    <Route path="/diary" element={<WriteDiaryPage />}></Route>
+                    <Route path="/chat" element={<ChatPage />}></Route>
 
                     <Route path="/record/point" element={<PointRecordPage />}></Route>
+
+
 
                     <Route path="/diary" element={<WriteDiaryPage />}></Route>
 
                     <Route path="/result" element={<ResultPage />}></Route>
+
                 </Route>
             </Routes>
         </>
