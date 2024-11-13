@@ -1,6 +1,6 @@
 import axiosInstance from "../axiosInstance";
 
-interface PetInfo {
+export interface PetInfo {
     name: string;
     level: number;
     experience: number;
@@ -11,7 +11,12 @@ interface PetInfo {
  * @returns {Promise<PetInfo>} 팻 정보
  */
 export const getPetInfo = async (): Promise<PetInfo> => {
-    const response = await axiosInstance.get<PetInfo>("/api/pet");
+    const accessToken = localStorage.getItem("accessToken");
+    const response = await axiosInstance.get<PetInfo>("/api/pet", {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
     return response.data;
 };
 
@@ -40,7 +45,14 @@ export const acquirePet = async (name: string): Promise<{ message: string }> => 
  * @param growthButton NORMAL, PREMIUM, SUPER 중 하나
  * @returns {Promise<{ EarnedExperience: number }>} 획득한 경험치 반환
  */
-export const purchaseGrowthButton = async (growthButton: "NORMAL" | "PREMIUM" | "SUPER"): Promise<{ EarnedExperience: number }> => {
-    const response = await axiosInstance.post<{ EarnedExperience: number }>(`/api/pet/${growthButton}`);
+export const purchaseGrowthButton = async (
+    growthButton: "NORMAL" | "PREMIUM" | "SUPER",
+): Promise<{ EarnedExperience: number }> => {
+    const accessToken = localStorage.getItem("accessToken");
+    const response = await axiosInstance.post<{ EarnedExperience: number }>(`/api/pet/${growthButton}`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
     return response.data;
 };
