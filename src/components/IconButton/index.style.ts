@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const ButtonElement = styled.button`
+export const ButtonElement = styled.button<{ onClick?: () => void }>`
     width: 40px;
     height: 40px;
 
