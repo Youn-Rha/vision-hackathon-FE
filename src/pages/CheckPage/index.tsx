@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Button } from "../../components/Button";
 import { CheckBar } from "../../components/CheckBar";
@@ -18,48 +18,28 @@ const questions = [
     { id: 9, text: "죽음이나 자해에 대한 생각이 들곤 한다." },
 ];
 
-// interface CheckPageProps {
-//     id: number;
-//     text: string;
-// }
-
 export const CheckPage = (): JSX.Element => {
-    //const [questions, setQuestions] = useState<CheckPageProps[]>([]);
     const [answers, setAnswers] = useState<{ [key: number]: number }>({});
-
-    useEffect(() => {
-        // 백엔드에서 질문 데이터를 받아오는 함수
-        const fetchQuestions = async () => {
-            try {
-                // const response = await fetch("/api/questions");
-                // const data = await response.json();
-                //setQuestions(data);
-            } catch (error) {
-                console.error("Failed to fetch questions:", error);
-            }
-        };
-        fetchQuestions();
-    }, []);
 
     const handleAnswerChange = (questionId: number, value: number) => {
         setAnswers((prevAnswers) => ({
             ...prevAnswers,
             [questionId]: value,
         }));
-
-        // 변경된 값을 백엔드로 전송
-        sendAnswerToBackend(questionId, value);
     };
 
-    const sendAnswerToBackend = async (questionId: number, value: number) => {
+    const submitAnswersToBackend = async () => {
+        // answers 객체를 배열로 변환하여 순서대로 값만 전송
+        const answerArray = questions.map((question) => answers[question.id] || 0);
+
         try {
-            await fetch("/api/submit-answer", {
+            await fetch("/api/submit-answers", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ questionId, answer: value }),
+                body: JSON.stringify({ answers: answerArray }),
             });
         } catch (error) {
-            console.error("Failed to send answer:", error);
+            console.error("Failed to submit answers:", error);
         }
     };
 
@@ -76,14 +56,14 @@ export const CheckPage = (): JSX.Element => {
                             {question.text}
                         </Text>
                         <CheckBar
-                            value={answers[question.id] || 50} // 초기값 50
+                            value={answers[question.id] || 0} // 초기값 0
                             onChange={(value) => handleAnswerChange(question.id, value)}
                         />
                     </Styles.QuestionWrapper>
                 ))}
             </Styles.QuestionsContainer>
 
-            <Button variant="tertiary" width="152px" height="45px">
+            <Button variant="tertiary" width="152px" height="45px" onClick={submitAnswersToBackend}>
                 제출하기
             </Button>
         </Styles.Container>

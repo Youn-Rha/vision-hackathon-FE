@@ -22,8 +22,8 @@ export const FixedHeader = styled.div`
 export const QuestionsContainer = styled.div`
     width: 100%;
     max-width: 600px;
-    margin: 60px auto 0px;
-    padding: 20px 20px 60px;
+    margin: 0px auto 0px;
+    padding: 20px 20px 20px;
     display: flex;
     flex-direction: column;
     gap: 30px;
