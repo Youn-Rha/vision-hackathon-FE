@@ -8,6 +8,7 @@ import { LoginPage } from "@/pages/LoginPage";
 import { resetStyles } from "@/styles/reset";
 import { rootStyles } from "@/styles/root";
 
+import { CharacterPage } from "./pages/CharacterPage";
 import { CharacterStartPage } from "./pages/CharacterStartPage";
 import { CheckEndPage } from "./pages/CheckEndPage";
 import { CheckPage } from "./pages/CheckPage";
@@ -25,15 +26,15 @@ export const Router = () => {
                 <Route path="/" element={<RootLayout />}>
                     <Route path="/" element={<MainPage />}></Route>
                     <Route path="/login" element={<LoginPage />}></Route>
+
+                    <Route path="/character" element={<CharacterPage />}></Route>
                     <Route path="/character/setting" element={<CharacterSettingPage />}></Route>
+                    <Route path="/character/start" element={<CharacterStartPage />}></Route>
 
                     <Route path="/check" element={<CheckPage />}></Route>
-
+                    <Route path="/check/start" element={<CheckStartPage />}></Route>
                     <Route path="/check/end" element={<CheckEndPage />}></Route>
 
-                    <Route path="/check/start" element={<CheckStartPage />}></Route>
-
-                    <Route path="/character/start" element={<CharacterStartPage />}></Route>
                     <Route path="/mypage" element={<MyPage />}></Route>
 
                     <Route path="/memo" element={<MemoPage />}></Route>
