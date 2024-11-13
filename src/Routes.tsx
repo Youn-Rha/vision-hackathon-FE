@@ -20,6 +20,7 @@ import { MemoPage } from "./pages/MemoPage";
 import { MyPage } from "./pages/MyPage";
 import { PointRecordPage } from "./pages/PointRecordPage";
 import { RootLayout } from "@/layouts/RootLayout";
+import { ResultPage } from "./pages/ResultPage";
 
 export const Router = () => {
     return (
@@ -45,6 +46,13 @@ export const Router = () => {
                     <Route path="/chat" element={<ChatPage />}></Route>
 
                     <Route path="/record/point" element={<PointRecordPage />}></Route>
+
+
+
+                    <Route path="/diary" element={<WriteDiaryPage />}></Route>
+
+                    <Route path="/result" element={<ResultPage />}></Route>
+
                 </Route>
             </Routes>
         </>
