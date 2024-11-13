@@ -7,9 +7,10 @@ import * as Styles from "./index.style";
 
 export interface IconButtonProps {
     variant: "calendar" | "user" | "chat" | "book";
+    onClick?: () => void;
 }
 
-export const IconButton = ({ variant = "book" }: IconButtonProps) => {
+export const IconButton = ({ variant = "book", onClick }: IconButtonProps) => {
     const iconList = {
         calendar: calendarIcon,
         user: userIcon,
@@ -18,7 +19,7 @@ export const IconButton = ({ variant = "book" }: IconButtonProps) => {
     };
 
     return (
-        <Styles.ButtonElement>
+        <Styles.ButtonElement onClick={onClick}>
             <Styles.IconElement src={iconList[variant]}></Styles.IconElement>
         </Styles.ButtonElement>
     );
