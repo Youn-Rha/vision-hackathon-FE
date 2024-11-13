@@ -5,6 +5,9 @@ import { Text } from "@/components/Text";
 import * as Styles from "./index.style";
 
 export const LoginPage = () => {
+    const handleKakaoLogin = () => {
+        window.location.href = 'http://kkia.backapi.site:8080/api/auth/oauth/kakao';
+      };
     return (
         <Styles.Container>
             <Styles.TextContainer>
@@ -16,7 +19,7 @@ export const LoginPage = () => {
                 </Text>
             </Styles.TextContainer>
             <Temp width="250px" height="220px" />
-            <Button variant="login" width="320px" height="67px">
+            <Button variant="login" width="320px" height="67px" onClick={handleKakaoLogin}>
                 카카오 계정으로 로그인
             </Button>
         </Styles.Container>
