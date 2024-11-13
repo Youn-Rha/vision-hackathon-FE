@@ -30,7 +30,7 @@ export const MyPage = () => {
     return (
         <Styles.Container>
             <PageBar pageName="마이페이지" />
-            <CharacterBG width="176px" height="176px" imageUrl={Character} />
+            <CharacterBG width="150px" height="150px" imageUrl={Character} />
             <Styles.TextContainer>
                 {loading ? (
                     <Text size="m" weight="bold">
