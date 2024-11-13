@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { PageBar } from "../../components/PageBar";
 import { Temp } from "../../components/Temp";
 import { Text } from "../../components/Text";
@@ -5,6 +6,22 @@ import { TextArea } from "../../components/TextArea";
 import * as Styles from "./index.style";
 
 export const ResultPage = () => {
+    const [data, setData] = useState("");
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("/api/get-result");
+                const result = await response.json();
+                setData(result.data);
+            } catch (error) {
+                console.error("Failed to fetch data:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <Styles.Container>
             <PageBar pageName="진단 결과" />
@@ -20,7 +37,7 @@ export const ResultPage = () => {
             
             <Styles.ResultWrapper>
                 <Text size="m" weight="bold">결과</Text>
-                <TextArea variant="primary" />
+                <TextArea variant="primary" readOnly={true} value={data} />
             </Styles.ResultWrapper>
         </Styles.Container>
     );
