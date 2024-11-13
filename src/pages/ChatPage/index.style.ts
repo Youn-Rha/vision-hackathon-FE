@@ -40,7 +40,7 @@ export const ChatContainer = styled.div`
 
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
 
     & > div {
         animation: ${fadeIn} 0.5s ease-in-out;
