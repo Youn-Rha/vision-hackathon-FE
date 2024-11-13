@@ -1,9 +1,12 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { kakaoLoginCallback } from "../../apis/auth/auth.ts";
+import { useAuthStore } from "@/store.ts";
 
 export const RedirectPage = () => {
     const navigate = useNavigate();
+    const setTokens = useAuthStore((state) => state.setTokens);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,7 +22,8 @@ export const RedirectPage = () => {
                     // 응답에서 accessToken과 refreshToken을 로컬스토리지에 저장
                     localStorage.setItem("accessToken", response.accessToken);
                     localStorage.setItem("refreshToken", response.refreshToken);
-
+                    setTokens(response.accessToken, response.refreshToken);
+                    console.log(useAuthStore.getState());
                     // /main으로 이동
                     navigate("/");
                 } catch (error) {
@@ -29,7 +33,7 @@ export const RedirectPage = () => {
         };
 
         fetchData();
-    }, [navigate]);
+    }, [navigate, setTokens]);
 
     return <div>카카오 로그인 중입니다...</div>;
 };
