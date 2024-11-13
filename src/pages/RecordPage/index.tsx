@@ -50,7 +50,6 @@ export const RecordPage = () => {
                 <Styles.ArrowButton direction="right" onClick={handleNextDay}></Styles.ArrowButton>
             </Styles.DateContainer>
 
-            {/* Tab Buttons */}
             <Styles.Tabs>
                 <Styles.Tab onClick={() => handleTabClick(0)} active={active === 0}>
                     1일 1 질문
@@ -63,7 +62,6 @@ export const RecordPage = () => {
                 </Styles.Tab>
             </Styles.Tabs>
 
-            {/* Tab Content */}
             {active === 0 && (
                 <Styles.TextContainer>
                     <Text size="m" color="black" weight="bold">
@@ -107,7 +105,7 @@ export const RecordPage = () => {
             {active === 2 && (
                 <Styles.ChatContainer>
                     {messages.map((message, index) => (
-                        <Styles.MessageWrapper key={index} variant={message.variant} spacing={message.spacing}>
+                        <Styles.MessageWrapper key={index} variant={message.variant}>
                             <Chat variant={message.variant}>{message.text}</Chat>
                         </Styles.MessageWrapper>
                     ))}

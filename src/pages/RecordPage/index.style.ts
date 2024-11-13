@@ -101,15 +101,15 @@ export const ChatContainer = styled.div`
 
     display: flex;
     flex-direction: column;
+    gap: 20px;
 
     overflow-y: scroll;
 `;
 
-export const MessageWrapper = styled.div<{ variant: "AI" | "USER"; spacing: number }>`
+export const MessageWrapper = styled.div<{ variant: "AI" | "USER" }>`
     display: flex;
 
     justify-content: ${(props) => (props.variant === "USER" ? "flex-end" : "flex-start")};
-    margin-top: ${(props) => props.spacing}px;
 `;
 
 export const FixedHeader = styled.div`
