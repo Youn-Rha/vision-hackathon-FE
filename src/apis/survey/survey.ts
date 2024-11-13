@@ -8,10 +8,10 @@ interface SurveyResult {
 
 /**
  * 사용자가 작성한 모든 진단표 결과 조회 (GET /api/survey)
- * @returns {Promise<SurveyResult[]>} 사용자가 작성한 진단표 결과 배열
+ * @returns {Promise<SurveyResult>} 사용자가 작성한 진단표 결과 배열
  */
-export const getAllSurveyResults = async (): Promise<SurveyResult[]> => {
-    const response = await axiosInstance.get<SurveyResult[]>("/api/survey");
+export const getAllSurveyResults = async (): Promise<SurveyResult> => {
+    const response = await axiosInstance.get<SurveyResult>("/api/survey/user", {});
     return response.data;
 };
 
