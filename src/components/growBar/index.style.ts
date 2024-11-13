@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { GrowBarProps } from ".";
+
+import { GrowBarProps } from "./index";
 
 export const Container = styled.div`
     width: 230px;
