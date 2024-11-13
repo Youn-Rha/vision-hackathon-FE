@@ -1,23 +1,46 @@
 import styled from "@emotion/styled";
+import { Text } from "../../components/Text";
 
 export const ScreenContainer = styled.div`
-    padding: 20px;
-    font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
-
     max-width: 400px;
     height: 100vh;
     margin: 0 auto;
+    gap: 30px;
+`;
+
+export const UpWrapper = styled.div`
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--color-primary);
 `;
 
 export const Header = styled.div`
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 10px 0;
+`;
+
+export const SelectWrapper = styled.div`
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+`;
+
+export const Select = styled.select`
+    padding: 5px 10px;
+    font-size: 16px;
+    border: 1px solid var(--color-gray);
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333;
+
+    &:focus {
+        outline: none;
+        border-color: var(--color-primary);
+    }
 `;
 
 export const DateText = styled.div`
@@ -27,20 +50,29 @@ export const DateText = styled.div`
 
 export const Calendar = styled.div`
     display: flex;
-    gap: 10px;
-    margin-top: 10px;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px;
+    scroll-snap-type: x mandatory;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
-export const DateItem = styled.div<{ isSelected: boolean }>`
+export const DateItem = styled.div<{ isSelected: boolean; isToday: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     color: ${({ isSelected }) => (isSelected ? "#ffffff" : "#333")};
-    background-color: ${({ isSelected }) => (isSelected ? "#4caf50" : "transparent")};
+    background-color: ${({ isSelected, isToday }) =>
+        isSelected ? "#4caf50" : isToday ? "#e0e0e0" : "transparent"};
     border-radius: 20px;
     padding: 5px 10px;
+    min-width: 60px;
+    height: 80px;
+    scroll-snap-align: start;
 
     .memo-count {
         font-size: 10px;
@@ -57,13 +89,14 @@ export const SelectedDate = styled.div`
 export const DayCounter = styled.div`
     font-size: 14px;
     color: gray;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 `;
 
-export const MemoTitle = styled.div`
+export const MemoTitle = styled(Text)`
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
+    margin-left: 20px;
 `;
 
 export const MemosContainer = styled.div`
@@ -88,15 +121,16 @@ export const AddButtonWrapper = styled.div`
 `;
 
 export const AddButton = styled.button`
-    font-size: 24px;
-    padding: 5px 10px;
+    font-size: 40px;
+    padding: 10px 20px;
     cursor: pointer;
     background-color: #4caf50;
     color: #ffffff;
-    border: none;
-    border-radius: 50%;
-    width: 48px;
+    
+    border-radius: 30px;
+    width: 70px;
     height: 48px;
+
     display: flex;
     align-items: center;
     justify-content: center;
