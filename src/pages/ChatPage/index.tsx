@@ -8,10 +8,9 @@ import { TextArea } from "@/components/TextArea";
 import * as Styles from "./index.style";
 
 export const ChatPage = () => {
-    const [messages, setMessages] = useState<{ variant: "AI" | "USER"; text: string; spacing: number }[]>([
-        { variant: "AI", text: "무엇을 도와드릴까요?", spacing: 10 },
+    const [messages, setMessages] = useState<{ variant: "AI" | "USER"; text: string }[]>([
+        { variant: "AI", text: "무엇을 도와드릴까요?" },
     ]);
-    const [lastMessageTime, setLastMessageTime] = useState<Date | null>(null);
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -19,12 +18,7 @@ export const ChatPage = () => {
         const inputText = textAreaRef.current?.value.trim();
         if (!inputText) return;
 
-        const currentTime = new Date();
-        const spacing = lastMessageTime && currentTime.getTime() - lastMessageTime.getTime() > 10000 ? 25 : 5;
-
-        setMessages((prevMessages) => [...prevMessages, { variant: "USER", text: inputText, spacing }]);
-
-        setLastMessageTime(currentTime);
+        setMessages((prevMessages) => [...prevMessages, { variant: "USER", text: inputText }]);
 
         if (textAreaRef.current) {
             textAreaRef.current.value = "";
@@ -43,7 +37,7 @@ export const ChatPage = () => {
 
             <Styles.ChatContainer>
                 {messages.map((message, index) => (
-                    <Styles.MessageWrapper key={index} variant={message.variant} spacing={message.spacing}>
+                    <Styles.MessageWrapper key={index} variant={message.variant}>
                         <Chat variant={message.variant}>{message.text}</Chat>
                     </Styles.MessageWrapper>
                 ))}

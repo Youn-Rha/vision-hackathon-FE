@@ -40,6 +40,7 @@ export const ChatContainer = styled.div`
 
     display: flex;
     flex-direction: column;
+    gap: 25px;
 
     & > div {
         animation: ${fadeIn} 0.5s ease-in-out;
@@ -54,8 +55,7 @@ export const InputContainer = styled.div`
     justify-content: space-between;
 `;
 
-export const MessageWrapper = styled.div<{ variant: "AI" | "USER"; spacing: number }>`
+export const MessageWrapper = styled.div<{ variant: "AI" | "USER" }>`
     display: flex;
     justify-content: ${(props) => (props.variant === "USER" ? "flex-end" : "flex-start")};
-    margin-top: ${(props) => props.spacing}px;
 `;
