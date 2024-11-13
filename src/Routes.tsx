@@ -22,6 +22,8 @@ import { PointRecordPage } from "./pages/PointRecordPage";
 import { RecordPage } from "./pages/RecordPage";
 import { ResultPage } from "./pages/ResultPage";
 import { RootLayout } from "@/layouts/RootLayout";
+import { RedirectPage } from "./pages/RedirectPage";
+
 
 export const Router = () => {
     return (
@@ -31,6 +33,7 @@ export const Router = () => {
                 <Route path="/" element={<RootLayout />}>
                     <Route path="/" element={<MainPage />}></Route>
                     <Route path="/login" element={<LoginPage />}></Route>
+                    <Route path="/redirection" element={<RedirectPage />} />
 
                     <Route path="/character" element={<CharacterPage />}></Route>
                     <Route path="/character/setting" element={<CharacterSettingPage />}></Route>
