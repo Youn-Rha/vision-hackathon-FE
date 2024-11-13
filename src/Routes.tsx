@@ -16,6 +16,7 @@ import { CheckStartPage } from "./pages/CheckStartPage";
 import { MainPage } from "./pages/MainPage";
 import { MemoPage } from "./pages/MemoPage";
 import { MyPage } from "./pages/MyPage";
+import { PointRecordPage } from "./pages/PointRecordPage";
 import { RootLayout } from "@/layouts/RootLayout";
 
 export const Router = () => {
@@ -38,6 +39,8 @@ export const Router = () => {
                     <Route path="/mypage" element={<MyPage />}></Route>
 
                     <Route path="/memo" element={<MemoPage />}></Route>
+
+                    <Route path="/record/point" element={<PointRecordPage />}></Route>
                 </Route>
             </Routes>
         </>
