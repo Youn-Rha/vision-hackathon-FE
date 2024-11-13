@@ -19,9 +19,11 @@ import { MainPage } from "./pages/MainPage";
 import { MemoPage } from "./pages/MemoPage";
 import { MyPage } from "./pages/MyPage";
 import { PointRecordPage } from "./pages/PointRecordPage";
-import { RootLayout } from "@/layouts/RootLayout";
+import { RecordPage } from "./pages/RecordPage";
 import { ResultPage } from "./pages/ResultPage";
+import { RootLayout } from "@/layouts/RootLayout";
 import { RedirectPage } from "./pages/RedirectPage";
+
 
 export const Router = () => {
     return (
@@ -47,14 +49,12 @@ export const Router = () => {
                     <Route path="/diary" element={<WriteDiaryPage />}></Route>
                     <Route path="/chat" element={<ChatPage />}></Route>
 
+                    <Route path="/record" element={<RecordPage />}></Route>
                     <Route path="/record/point" element={<PointRecordPage />}></Route>
-
-
 
                     <Route path="/diary" element={<WriteDiaryPage />}></Route>
 
                     <Route path="/result" element={<ResultPage />}></Route>
-
                 </Route>
             </Routes>
         </>
