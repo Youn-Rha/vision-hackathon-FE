@@ -19,4 +19,5 @@ export const Arrow = styled.img`
     width: 10px;
     margin-left: 20px;
     display: inline-block;
+    cursor: pointer;
 `;
