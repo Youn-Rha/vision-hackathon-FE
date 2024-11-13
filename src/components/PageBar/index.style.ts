@@ -12,6 +12,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
 `;
 export const Arrow = styled.img`
     height: 20px;

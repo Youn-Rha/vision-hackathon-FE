@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const Container = styled.div<{ width: string; height: string }>`
     width: ${(props) => props.width};
     height: ${(props) => props.height};
-
+    aspect-ratio: 1 / 1;
     background-color: var(--color-lightgray);
     border-radius: 50%;
     box-shadow: 0px 0px 50px -8px var(--color-primary);

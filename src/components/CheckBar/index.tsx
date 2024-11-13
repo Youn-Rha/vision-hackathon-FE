@@ -7,7 +7,7 @@ export interface CheckBarProps {
     onChange: (value: number) => void; // 상위 컴포넌트에 값을 전달하는 콜백
 }
 
-export const CheckBar = ({ value = 50, onChange }: CheckBarProps) => {
+export const CheckBar = ({ value = 0, onChange }: CheckBarProps) => {
     const [currentValue, setCurrentValue] = useState<number>(value);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export const CheckBar = ({ value = 50, onChange }: CheckBarProps) => {
                 type="range"
                 value={currentValue}
                 min={0}
-                max={100}
+                max={3}
                 onChange={handleSliderChange}
             />
             <Styles.TextContainer>

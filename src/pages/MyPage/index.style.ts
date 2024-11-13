@@ -8,7 +8,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 90px;
+    gap: 55px;
 `;
 
 export const Button = styled.button<{ size: string; color: string }>`

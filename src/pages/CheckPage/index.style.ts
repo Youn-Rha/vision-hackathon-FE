@@ -14,9 +14,6 @@ export const Container = styled.div`
 `;
 
 export const FixedHeader = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     z-index: 10;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -25,8 +22,8 @@ export const FixedHeader = styled.div`
 export const QuestionsContainer = styled.div`
     width: 100%;
     max-width: 600px;
-    margin: 60px auto 0px;
-    padding: 20px 20px 60px;
+    margin: 0px auto 0px;
+    padding: 20px 20px 20px;
     display: flex;
     flex-direction: column;
     gap: 30px;
