@@ -29,7 +29,7 @@ export const CheckStartPage = () => {
 
     return (
         <Styles.Container>
-            <PageBar pagename="문진표 작성" />
+            <PageBar pageName="문진표 작성" />
             <Styles.Wrapper>
                 <Styles.TextContainer>
                     <Text size="l" weight="normal" color="white">

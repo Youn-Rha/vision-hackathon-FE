@@ -3,8 +3,14 @@ import styled from "@emotion/styled";
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    width: 100%;
-    min-height: 100vh;
+    align-items: center;
+    gap: 30px;
+
+    max-width: 400px;
+    height: 100vh;
+    margin: 0 auto;
+
+    padding-bottom: 30px;
 `;
 
 export const FixedHeader = styled.div`
@@ -37,14 +43,14 @@ export const QuestionWrapper = styled.div`
     text-align: center;
 `;
 
-export const FixedFooter = styled.div`
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    /* background-color: var(--color-white); */
-    padding: 4px 20px 12px;
-    display: flex;
-    justify-content: center;
-    z-index: 10;
-`;
+// export const FixedFooter = styled.div`
+//     position: fixed;
+//     bottom: 0;
+//     left: 0;
+//     width: 100%;
+//     /* background-color: var(--color-white); */
+//     padding: 4px 20px 12px;
+//     display: flex;
+//     justify-content: center;
+//     z-index: 10;
+// `;

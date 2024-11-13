@@ -18,10 +18,10 @@ const questions = [
     { id: 9, text: "죽음이나 자해에 대한 생각이 들곤 한다." },
 ];
 
-interface CheckPageProps {
-    id: number;
-    text: string;
-}
+// interface CheckPageProps {
+//     id: number;
+//     text: string;
+// }
 
 export const CheckPage = (): JSX.Element => {
     //const [questions, setQuestions] = useState<CheckPageProps[]>([]);
@@ -31,8 +31,8 @@ export const CheckPage = (): JSX.Element => {
         // 백엔드에서 질문 데이터를 받아오는 함수
         const fetchQuestions = async () => {
             try {
-                const response = await fetch("/api/questions");
-                const data = await response.json();
+                // const response = await fetch("/api/questions");
+                // const data = await response.json();
                 //setQuestions(data);
             } catch (error) {
                 console.error("Failed to fetch questions:", error);
@@ -66,7 +66,7 @@ export const CheckPage = (): JSX.Element => {
     return (
         <Styles.Container>
             <Styles.FixedHeader>
-                <PageBar pagename="문진표 작성" />
+                <PageBar pageName="문진표 작성" />
             </Styles.FixedHeader>
 
             <Styles.QuestionsContainer>
@@ -82,11 +82,10 @@ export const CheckPage = (): JSX.Element => {
                     </Styles.QuestionWrapper>
                 ))}
             </Styles.QuestionsContainer>
-            <Styles.FixedFooter>
-                <Button variant="tertiary" width="152px" height="45px">
-                    제출하기
-                </Button>
-            </Styles.FixedFooter>
+
+            <Button variant="tertiary" width="152px" height="45px">
+                제출하기
+            </Button>
         </Styles.Container>
     );
 };
