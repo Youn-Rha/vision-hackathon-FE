@@ -7,6 +7,7 @@ import * as Styles from "./index.style";
 
 export interface PointButtonProps {
     variant: "water" | "sun" | "nutrients";
+    onClick?: () => void;
 }
 
 export const PointButton = (props: PointButtonProps) => {
@@ -30,7 +31,7 @@ export const PointButton = (props: PointButtonProps) => {
 
     return (
         <Styles.Container>
-            <Styles.Button>
+            <Styles.Button onClick={props.onClick}>
                 {actionList[props.variant]}
                 <Styles.Icon src={iconList[props.variant]} alt={props.variant} />
             </Styles.Button>

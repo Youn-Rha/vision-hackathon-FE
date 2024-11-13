@@ -6,6 +6,10 @@ import { PointButton } from "@/components/PointButton";
 import { Temp } from "@/components/Temp";
 import { Text } from "@/components/Text";
 
+import { useGetCharacter } from "@/hooks/CharacterPage/useGetCharacter";
+import { useGetPoint } from "@/hooks/CharacterPage/useGetPoint";
+import { useUpGradeExperience } from "@/hooks/CharacterPage/useUpGradeExperience";
+
 import * as Styles from "./index.style";
 
 export const CharacterPage = () => {
@@ -13,6 +17,16 @@ export const CharacterPage = () => {
 
     const handleBookClick = () => {
         navigate("/record/point");
+    };
+
+    const { name, level, experience, refetch } = useGetCharacter();
+    const { point, pointRefetch } = useGetPoint();
+    const { upgradeExperience } = useUpGradeExperience();
+
+    const handleExperienceUpgrade = async (growthButton: "NORMAL" | "PREMIUM" | "SUPER") => {
+        await upgradeExperience(growthButton);
+        refetch(); // 경험치 및 캐릭터 데이터 다시 가져오기
+        pointRefetch(); // 포인트 데이터 다시 가져오기
     };
 
     return (
@@ -23,25 +37,37 @@ export const CharacterPage = () => {
             </Styles.Header>
 
             <Styles.CharacterItem>
-                <Text size="l" color="black" weight="bold">
-                    저를 보러오셨군요! 반가워요 •ᴗ•
-                </Text>
+                {level === 1 && (
+                    <Text size="l" color="black" weight="bold">
+                        1단계 입니다
+                    </Text>
+                )}
+                {level === 2 && (
+                    <Text size="l" color="black" weight="bold">
+                        2단계 입니다
+                    </Text>
+                )}
+                {level === 3 && (
+                    <Text size="l" color="black" weight="bold">
+                        3단계 입니다
+                    </Text>
+                )}
                 <Temp width="300px" height="270px" />
                 <Text size="l" color="black" weight="bold">
-                    새싹
+                    {name}
                 </Text>
             </Styles.CharacterItem>
 
             <Styles.BarContainer>
-                <GrowBar experience={55} />
+                <GrowBar experience={experience} />
                 <Text size="s" color="gray" weight="normal">
-                    보유 포인트: 10 point
+                    보유 포인트: {point} point
                 </Text>
 
                 <Styles.ButtonContainer>
-                    <PointButton variant="water" />
-                    <PointButton variant="sun" />
-                    <PointButton variant="nutrients" />
+                    <PointButton variant="water" onClick={() => handleExperienceUpgrade("NORMAL")} />
+                    <PointButton variant="sun" onClick={() => handleExperienceUpgrade("PREMIUM")} />
+                    <PointButton variant="nutrients" onClick={() => handleExperienceUpgrade("SUPER")} />
                 </Styles.ButtonContainer>
             </Styles.BarContainer>
         </Styles.Container>

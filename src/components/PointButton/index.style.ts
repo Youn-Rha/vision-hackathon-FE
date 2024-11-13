@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Container = styled.button`
+export const Container = styled.div`
     width: 110px;
 
     display: flex;
@@ -12,7 +12,7 @@ export const Container = styled.button`
     gap: 5px;
 `;
 
-export const Button = styled.button`
+export const Button = styled.button<{ onClick?: () => void }>`
     width: 100%;
     height: 97px;
 
