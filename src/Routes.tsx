@@ -4,6 +4,7 @@ import { Global } from "@emotion/react";
 
 import { CharacterSettingPage } from "@/pages/CharacterSettingPage";
 import { LoginPage } from "@/pages/LoginPage";
+import { WriteDiaryPage } from "@/pages/WriteDiaryPage";
 
 import { resetStyles } from "@/styles/reset";
 import { rootStyles } from "@/styles/root";
@@ -41,6 +42,8 @@ export const Router = () => {
                     <Route path="/memo" element={<MemoPage />}></Route>
 
                     <Route path="/record/point" element={<PointRecordPage />}></Route>
+
+                    <Route path="/diary" element={<WriteDiaryPage />}></Route>
                 </Route>
             </Routes>
         </>
