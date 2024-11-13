@@ -1,10 +1,10 @@
 import axiosInstance from "../axiosInstance";
 
-interface Point {
+export interface Point {
     point: number;
 }
 
-interface PointLogEntry {
+export interface PointLogEntry {
     receivedDateTime: string;
     type: string;
     status: string;
@@ -16,7 +16,12 @@ interface PointLogEntry {
  * @returns {Promise<Point>} { point }
  */
 export const getPoint = async (): Promise<Point> => {
-    const response = await axiosInstance.get<Point>("/api/point");
+    const accessToken = localStorage.getItem("accessToken");
+    const response = await axiosInstance.get<Point>("/api/point", {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
     return response.data;
 };
 
