@@ -3,15 +3,15 @@ import * as Styles from "./index.style";
 import backArrow from "../../assets/backarrow.png"
 
 export interface PageBarProps {
-    pagename: string;
+    pageName: string;
 }
 
-export const PageBar = ({pagename}: PageBarProps) => {
+export const PageBar = ({pageName}: PageBarProps) => {
     return (
         <Styles.Container>
             <Styles.Arrow src={backArrow} />
             <Text size="m" weight="bold" color="black">
-                {pagename}
+                {pageName}
             </Text>
         </Styles.Container>
     );

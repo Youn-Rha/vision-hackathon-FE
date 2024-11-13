@@ -15,6 +15,7 @@ import { CheckEndPage } from "./pages/CheckEndPage";
 
 import { CheckStartPage } from "./pages/CheckStartPage";
 import { MyPage } from "./pages/MyPage";
+import { MemoPage } from "./pages/MemoPage";
 
 
 export const Router = () => {
@@ -35,6 +36,9 @@ export const Router = () => {
 
                     <Route path="/character/start" element={<CharacterStartPage />}></Route>
                     <Route path="/mypage" element={<MyPage />}></Route>
+
+                    <Route path="/memo" element={<MemoPage />}></Route>
+
 
 
                 </Route>
