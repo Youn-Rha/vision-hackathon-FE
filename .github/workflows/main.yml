@@ -33,7 +33,7 @@ jobs:
     - name: Install dependencies and build
       run: |
         npm install
-        npm run build -- --project tsconfig.build.json
+        npm run build
 
       # 빌드 파일을 서버로 전송
     - name: Copy build directory to server
