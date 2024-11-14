@@ -17,7 +17,10 @@ export const RedirectPage = () => {
                 try {
                     const response = await kakaoLoginCallback(code);
                     setTokens(response.accessToken, response.refreshToken);
-                    navigate("/");
+                    // 리다이렉트할 경로를 로컬스토리지에서 가져오고, 기본값을 "/"로 설정
+                    const redirectPath = localStorage.getItem("redirectPath") || "/";
+                    localStorage.removeItem("redirectPath"); // 사용 후 경로 삭제
+                    navigate(redirectPath);
                 } catch (error) {
                     console.error("토큰 요청 에러:", error);
                 }
@@ -27,5 +30,5 @@ export const RedirectPage = () => {
         fetchData();
     }, [navigate, setTokens]);
 
-    return <div>카카오 로그인 중입니다...</div>;
+    return <div>카카오 로그인 중입니다…</div>;
 };
