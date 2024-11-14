@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/Button";
@@ -11,10 +10,6 @@ import { useGetCharacterName } from "@/hooks/CharacterStartPage/useGetCharacterN
 
 export const CharacterStartPage = () => {
     const navigate = useNavigate();
-
-    const handleNextPage = useCallback(() => {
-        navigate("/");
-    }, []);
 
     const { data: name } = useGetCharacterName();
 
@@ -39,7 +34,7 @@ export const CharacterStartPage = () => {
 
             <Temp width="370px" height="330px" />
 
-            <Button variant="primary" width="150px" height="45px" onClick={handleNextPage}>
+            <Button variant="primary" width="150px" height="45px" onClick={() => navigate("/main")}>
                 시작하기
             </Button>
         </Styles.Container>
