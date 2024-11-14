@@ -25,3 +25,17 @@ export const withdrawMember = async (): Promise<{ message: string }> => {
     const response = await axiosInstance.delete<{ message: string }>("/api/members/withdrawal");
     return response.data;
 };
+
+interface MemberInfo {
+    name: string;
+    email: string;
+}
+
+/**
+ * 로그인한 사용자의 정보 조회 (GET /api/members)
+ * @returns {Promise<MemberInfo>} 사용자 이름과 이메일
+ */
+export const getUserInfo = async (): Promise<MemberInfo> => {
+    const response = await axiosInstance.get<MemberInfo>("/api/members");
+    return response.data;
+};

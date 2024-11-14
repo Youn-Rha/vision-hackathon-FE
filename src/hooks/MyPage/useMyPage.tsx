@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { getUserInfo } from "../../apis/auth/member";
 
 interface UserData {
     name: string;
