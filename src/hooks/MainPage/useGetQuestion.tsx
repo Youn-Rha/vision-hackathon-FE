@@ -10,7 +10,7 @@ interface IQuestion {
 }
 
 export const useGetQuestion = () => {
-    const [data, setData] = useState<IQuestion>({ id: 0, question: "", AnsweredToday: false, answer: "" });
+    const [data, setData] = useState<IQuestion>({ id: 1, question: "", AnsweredToday: false, answer: "" });
 
     const fetchData = useCallback(async () => {
         const response = await getRandomQuestion();
