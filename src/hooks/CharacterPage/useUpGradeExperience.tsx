@@ -5,7 +5,7 @@ import { purchaseGrowthButton } from "@/apis/pet/pet";
 export const useUpGradeExperience = () => {
     const [data, setData] = useState({ EarnedExperience: 0 });
 
-    const upgradeExperience = async (growthButton: "NORMAL" | "PREMIUM" | "SUPER") => {
+    const upgradeExperience = async (growthButton: "WATER" | "SUN" | "NUTRIENT") => {
         try {
             const response = await purchaseGrowthButton(growthButton);
             setData({ EarnedExperience: response.EarnedExperience });
