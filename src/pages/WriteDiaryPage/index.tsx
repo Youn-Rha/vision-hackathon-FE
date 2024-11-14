@@ -1,27 +1,28 @@
-import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/Button";
 import { Temp } from "@/components/Temp";
 import { TextArea } from "@/components/TextArea";
+
+import { useWriteDiary } from "@/hooks/WriteDiaryPage/useWriteDiary";
 
 import { PageBar } from "../../components/PageBar";
 import { Text } from "../../components/Text";
 import * as Styles from "./index.style";
 
 export const WriteDiaryPage = () => {
-    const answer1Ref = useRef<HTMLTextAreaElement>(null);
-    const answer2Ref = useRef<HTMLTextAreaElement>(null);
-    const answer3Ref = useRef<HTMLTextAreaElement>(null);
+    const navigate = useNavigate();
 
-    const answers = {
-        answer1: answer1Ref.current?.value || null,
-        answer2: answer2Ref.current?.value || null,
-        answer3: answer3Ref.current?.value || null,
-    };
+    const { answer1Ref, answer2Ref, answer3Ref, handleWriteDiary } = useWriteDiary();
 
     const handleSubmitClick = () => {
-        //post 요청
-        console.log(answers);
+        handleWriteDiary([
+            { type: "DAY", content: answer1Ref.current?.value || "" },
+            { type: "EMOTION", content: answer2Ref.current?.value || "" },
+            { type: "MEMO", content: answer3Ref.current?.value || "" },
+        ]);
+        alert("일기가 성공적으로 작성되었습니다!");
+        navigate("/main");
     };
 
     return (

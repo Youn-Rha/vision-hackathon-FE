@@ -24,11 +24,7 @@ export const getDiaryById = async (diaryId: number): Promise<DiaryEntry> => {
  * @param content 일기 내용
  * @returns {Promise<{ message: string }>} 수정 성공 메시지
  */
-export const updateDiary = async (
-    diaryId: number,
-    type: string,
-    content: string
-): Promise<{ message: string }> => {
+export const updateDiary = async (diaryId: number, type: string, content: string): Promise<{ message: string }> => {
     const response = await axiosInstance.put<{ message: string }>(`/api/diary/${diaryId}`, { type, content });
     return response.data;
 };
@@ -49,7 +45,7 @@ export const deleteDiary = async (diaryId: number): Promise<{ message: string }>
  * @returns {Promise<{ message: string }>} 작성 성공 메시지
  */
 export const createDiaries = async (
-    diaries: { type: string; content: string }[]
+    diaries: { type: "DAY" | "EMOTION" | "MEMO"; content: string }[],
 ): Promise<{ message: string }> => {
     const response = await axiosInstance.post<{ message: string }>("/api/diary", diaries);
     return response.data;
