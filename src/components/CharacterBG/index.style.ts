@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Container = styled.div<{ width: string; height: string }>`
+export const Container = styled.button<{ width: string; height: string }>`
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     aspect-ratio: 1 / 1;
@@ -11,6 +11,10 @@ export const Container = styled.div<{ width: string; height: string }>`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    border: none;
+    outline: none;
+    cursor: pointer;
 `;
 
 export const Character = styled.img`

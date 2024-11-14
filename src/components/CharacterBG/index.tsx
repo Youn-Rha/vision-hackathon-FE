@@ -5,11 +5,12 @@ export interface CharacterBGProps {
     height: string;
 
     imageUrl: string;
+    onClick?: () => void;
 }
 
-export const CharacterBG = ({ width, height, imageUrl }: CharacterBGProps) => {
+export const CharacterBG = ({ width, height, imageUrl, onClick }: CharacterBGProps) => {
     return (
-        <Styles.Container width={width} height={height}>
+        <Styles.Container width={width} height={height} onClick={onClick}>
             <Styles.Character src={imageUrl} alt="character" />
         </Styles.Container>
     );
