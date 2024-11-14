@@ -1,33 +1,21 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 import { Button } from "@/components/Button";
 import { Chat } from "@/components/Chat";
 import { PageBar } from "@/components/PageBar";
 import { TextArea } from "@/components/TextArea";
 
+import { useChatStart } from "@/hooks/ChatPage/useChatStart";
+
 import * as Styles from "./index.style";
 
 export const ChatPage = () => {
-    const [messages, setMessages] = useState<{ variant: "AI" | "USER"; text: string }[]>([
-        { variant: "AI", text: "무엇을 도와드릴까요?" },
-    ]);
-    const textAreaRef = useRef<HTMLTextAreaElement>(null);
+    const { chatHistory, textAreaRef, handleSendMessage } = useChatStart();
     const messagesEndRef = useRef<HTMLDivElement>(null);
-
-    const handleSendClick = () => {
-        const inputText = textAreaRef.current?.value.trim();
-        if (!inputText) return;
-
-        setMessages((prevMessages) => [...prevMessages, { variant: "USER", text: inputText }]);
-
-        if (textAreaRef.current) {
-            textAreaRef.current.value = "";
-        }
-    };
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [messages]);
+    }, [chatHistory]);
 
     return (
         <Styles.Container>
@@ -36,7 +24,7 @@ export const ChatPage = () => {
             </Styles.FixedHeader>
 
             <Styles.ChatContainer>
-                {messages.map((message, index) => (
+                {chatHistory.map((message, index) => (
                     <Styles.MessageWrapper key={index} variant={message.variant}>
                         <Chat variant={message.variant}>{message.text}</Chat>
                     </Styles.MessageWrapper>
@@ -46,7 +34,7 @@ export const ChatPage = () => {
 
             <Styles.InputContainer>
                 <TextArea ref={textAreaRef} variant="secondary" width="80%" height="60px" placeholder="메세지 입력" />
-                <Button variant="rectangle" width="70px" height="60px" onClick={handleSendClick}>
+                <Button variant="rectangle" width="70px" height="60px" onClick={handleSendMessage}>
                     전송
                 </Button>
             </Styles.InputContainer>
