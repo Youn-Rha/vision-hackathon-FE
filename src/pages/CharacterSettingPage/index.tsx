@@ -1,9 +1,11 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/Button";
 import { Temp } from "@/components/Temp";
 import { Text } from "@/components/Text";
+
+import { useSettingCharacter } from "@/hooks/CharacterSettingPage/useSettingCharacter";
 
 import * as Styles from "./index.style";
 
@@ -14,15 +16,24 @@ export const CharacterSettingPage = () => {
 
     const navigate = useNavigate();
 
+    const { message, handleCharacterName } = useSettingCharacter();
+
     const handlePopUp = useCallback(() => {
         setIsPopUpOpen((prev) => !prev);
     }, []);
+
+    useEffect(() => {
+        if (message) {
+            alert(message);
+        }
+    }, [message]);
 
     const updateName = useCallback(() => {
         if (inputRef.current) {
             setCharacterName(inputRef.current.value);
         }
         handlePopUp();
+        handleCharacterName(characterName);
     }, [handlePopUp]);
 
     const handleNextPage = useCallback(() => {
