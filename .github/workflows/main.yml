@@ -24,7 +24,7 @@ jobs:
     - name: Cache node_modules
       uses: actions/cache@v2
       with:
-        path: node_modules
+        path: ./node_modules
         key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-modules-
@@ -33,7 +33,7 @@ jobs:
     - name: Install dependencies and build
       run: |
         npm install
-        npm run build
+        npm run build -- --project tsconfig.build.json
 
       # 빌드 파일을 서버로 전송
     - name: Copy build directory to server
