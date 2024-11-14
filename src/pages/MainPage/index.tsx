@@ -1,13 +1,29 @@
+import { useCallback, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { Button } from "@/components/Button";
 import { CharacterBG } from "@/components/CharacterBG";
 import { IconButton } from "@/components/IconButton";
 import { Text } from "@/components/Text";
+import { TextArea } from "@/components/TextArea";
+
+import { useGetQuestion } from "@/hooks/MainPage/useGetQuestion";
+import { useGetUser } from "@/hooks/MainPage/useGetUser";
+import { useWriteAnswer } from "@/hooks/MainPage/useWriteAnswer";
 
 import * as Styles from "./index.style";
 
 export const MainPage = () => {
     const navigate = useNavigate();
+    const { data: name } = useGetUser();
+    const { id, question, AnsweredToday, answer } = useGetQuestion();
+    const { handleWriteAnswer: writeAnswer } = useWriteAnswer();
+
+    const [respond, setRespond] = useState("");
+    const inputRef = useRef<HTMLTextAreaElement | null>(null);
+    const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+
+    const today = new Date();
 
     const handleCalendarClick = () => {
         navigate("/memo");
@@ -21,6 +37,22 @@ export const MainPage = () => {
         navigate("/chat");
     };
 
+    const handleCharacterClick = () => {
+        navigate("/character");
+    };
+
+    const handlePopUp = useCallback(() => {
+        setIsPopUpOpen((prev) => !prev);
+    }, []);
+
+    const handleWriteAnswer = useCallback(() => {
+        if (inputRef.current) {
+            setRespond(inputRef.current.value);
+        }
+        handlePopUp();
+        writeAnswer({ questionId: id, response: respond });
+    }, [handlePopUp]);
+
     return (
         <Styles.Container>
             <Styles.Header>
@@ -33,18 +65,33 @@ export const MainPage = () => {
             </Styles.Header>
             <Styles.Header>
                 <Text size="l" color="black" weight="bold">
-                    user 님 기다렸어요!
+                    {name ? name : "user"}님 기다렸어요!
                 </Text>
             </Styles.Header>
-            <CharacterBG width="350px" height="350px" imageUrl=""></CharacterBG>
-            <Styles.QContainer>
+            <CharacterBG width="350px" height="350px" imageUrl="" onClick={handleCharacterClick}></CharacterBG>
+            <Styles.QContainer onClick={handlePopUp}>
                 <Text size="s" color="gray" weight="normal">
-                    DAY 1
+                    TODAY - {today.getMonth() + 1}월 {today.getDate()}일
                 </Text>
                 <Text size="l" color="black" weight="bold">
-                    오늘 소소하게 느낀 행복이 있나요?
+                    {question}
                 </Text>
+                {AnsweredToday && <Styles.AnswerContainer>{answer}</Styles.AnswerContainer>}
             </Styles.QContainer>
+
+            {isPopUpOpen && (
+                <Styles.PopUpContainer>
+                    <Styles.PopUpWrapper>
+                        <Text size="m" color="black" weight="bold">
+                            답변을 작성해보세요:
+                        </Text>
+                        <TextArea variant="primary" width="100%" height="100px" ref={inputRef}></TextArea>
+                        <Button variant="rectangle" width="100%" height="70px" onClick={handleWriteAnswer}>
+                            확인
+                        </Button>
+                    </Styles.PopUpWrapper>
+                </Styles.PopUpContainer>
+            )}
         </Styles.Container>
     );
 };

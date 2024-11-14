@@ -7,6 +7,8 @@ import { Text } from "@/components/Text";
 
 import * as Styles from "@/pages/CharacterSettingPage/index.style";
 
+import { useGetCharacterName } from "@/hooks/CharacterStartPage/useGetCharacterName";
+
 export const CharacterStartPage = () => {
     const navigate = useNavigate();
 
@@ -14,11 +16,13 @@ export const CharacterStartPage = () => {
         navigate("/");
     }, []);
 
+    const { data: name } = useGetCharacterName();
+
     return (
         <Styles.Container>
             <Styles.TextContainer>
                 <Text size="xl" color="primary" weight="bold">
-                    캐릭터 이름
+                    {name}
                 </Text>
                 <Styles.TextItem>
                     <Text size="xl" color="black" weight="bold">

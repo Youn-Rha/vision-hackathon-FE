@@ -3,6 +3,8 @@ import axiosInstance from "../axiosInstance";
 interface Question {
     id: number;
     question: string;
+    AnsweredToday: boolean;
+    answer: string;
 }
 
 interface Response {
@@ -17,10 +19,7 @@ interface Response {
  * @param question 새로운 질문 내용
  * @returns {Promise<{ message: string }>}
  */
-export const updateQuestion = async (
-    dailyQuestionId: number,
-    question: string
-): Promise<{ message: string }> => {
+export const updateQuestion = async (dailyQuestionId: number, question: string): Promise<{ message: string }> => {
     const response = await axiosInstance.put<{ message: string }>(`/api/question/${dailyQuestionId}`, { question });
     return response.data;
 };
@@ -39,12 +38,9 @@ export const deleteQuestion = async (dailyQuestionId: number): Promise<{ message
  * 답변 등록 (POST /api/response)
  * @param questionId 답변할 질문의 ID
  * @param response 답변 내용
- * @returns {Promise<{ message: string }>}
+ * @returns {Promise<{ questionId: number, response: string }>}
  */
-export const createResponse = async (
-    questionId: number,
-    response: string
-): Promise<{ message: string }> => {
+export const createResponse = async (questionId: number, response: string): Promise<{ message: string }> => {
     const res = await axiosInstance.post<{ message: string }>("/api/response", { questionId, response });
     return res.data;
 };
