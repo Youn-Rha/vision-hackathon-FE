@@ -46,7 +46,7 @@ export const acquirePet = async (name: string): Promise<{ message: string }> => 
  * @returns {Promise<{ EarnedExperience: number }>} 획득한 경험치 반환
  */
 export const purchaseGrowthButton = async (
-    growthButton: "NORMAL" | "PREMIUM" | "SUPER",
+    growthButton: "WATER" | "SUN" | "NUTRIENT",
 ): Promise<{ EarnedExperience: number }> => {
     const accessToken = localStorage.getItem("accessToken");
     const response = await axiosInstance.post<{ EarnedExperience: number }>(`/api/pet/${growthButton}`, {

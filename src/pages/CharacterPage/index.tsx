@@ -23,7 +23,7 @@ export const CharacterPage = () => {
     const { point, pointRefetch } = useGetPoint();
     const { upgradeExperience } = useUpGradeExperience();
 
-    const handleExperienceUpgrade = async (growthButton: "NORMAL" | "PREMIUM" | "SUPER") => {
+    const handleExperienceUpgrade = async (growthButton: "WATER" | "SUN" | "NUTRIENT") => {
         await upgradeExperience(growthButton);
         refetch(); // 경험치 및 캐릭터 데이터 다시 가져오기
         pointRefetch(); // 포인트 데이터 다시 가져오기
@@ -65,9 +65,9 @@ export const CharacterPage = () => {
                 </Text>
 
                 <Styles.ButtonContainer>
-                    <PointButton variant="water" onClick={() => handleExperienceUpgrade("NORMAL")} />
-                    <PointButton variant="sun" onClick={() => handleExperienceUpgrade("PREMIUM")} />
-                    <PointButton variant="nutrients" onClick={() => handleExperienceUpgrade("SUPER")} />
+                    <PointButton variant="water" onClick={() => handleExperienceUpgrade("WATER")} />
+                    <PointButton variant="sun" onClick={() => handleExperienceUpgrade("SUN")} />
+                    <PointButton variant="nutrients" onClick={() => handleExperienceUpgrade("NUTRIENT")} />
                 </Styles.ButtonContainer>
             </Styles.BarContainer>
         </Styles.Container>
