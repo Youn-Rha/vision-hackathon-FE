@@ -23,6 +23,7 @@ import { RecordPage } from "./pages/RecordPage";
 import { ResultPage } from "./pages/ResultPage";
 import { RootLayout } from "@/layouts/RootLayout";
 import { RedirectPage } from "./pages/RedirectPage";
+import { HomePage } from "./pages/HomePage";
 
 
 export const Router = () => {
@@ -31,7 +32,8 @@ export const Router = () => {
             <Global styles={[resetStyles, rootStyles]} />
             <Routes>
                 <Route path="/" element={<RootLayout />}>
-                    <Route path="/" element={<MainPage />}></Route>
+                    <Route path="/" element={<HomePage />}></Route>
+                    <Route path="/main" element={<MainPage />}></Route>
                     <Route path="/login" element={<LoginPage />}></Route>
                     <Route path="/redirection" element={<RedirectPage />} />
 
