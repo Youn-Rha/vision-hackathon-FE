@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 
-import { GrowBar } from "@/components/GrowBar";
 import { IconButton } from "@/components/IconButton";
 import { PointButton } from "@/components/PointButton";
 import { Temp } from "@/components/Temp";
@@ -11,6 +10,7 @@ import { useGetPoint } from "@/hooks/CharacterPage/useGetPoint";
 import { useUpGradeExperience } from "@/hooks/CharacterPage/useUpGradeExperience";
 
 import * as Styles from "./index.style";
+import { GrowBar } from "@/components/GrowBar";
 
 export const CharacterPage = () => {
     const navigate = useNavigate();
