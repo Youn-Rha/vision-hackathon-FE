@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { PageBar } from "../../components/PageBar";
 import { Temp } from "../../components/Temp";
 import { Text } from "../../components/Text";
+import { TextArea } from "../../components/TextArea";
 import * as Styles from "./index.style";
-import { TextArea } from "@/components/TextArea";
 
 export const ResultPage = () => {
     const [data, setData] = useState("");

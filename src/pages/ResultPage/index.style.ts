@@ -1,5 +1,6 @@
 // index.style.js
 import styled from "@emotion/styled";
+import { TextArea } from "../../components/TextArea";
 
 export const Container = styled.div`
     max-width: 400px;
