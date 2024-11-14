@@ -76,12 +76,27 @@ axiosInstance.interceptors.response.use(
                     alert("다시 로그인 해 주세요.");
                     window.location.href = "/login";
                 }
-            } else if (status === 404) {
-                // 404 에러: 펫을 획득 요청
+            } else if (status === 462) {
+                // 462 에러: 펫을 획득 요청
                 if (!isAlertDisplayed) {
                     isAlertDisplayed = true;
                     alert("펫을 획득해주세요.");
                     window.location.href = "/character/setting";
+                }
+            }
+             else if (status === 460) {
+                // 460 에러: 펫을 획득 요청
+                if (!isAlertDisplayed) {
+                    isAlertDisplayed = true;
+                    alert("잘못된 접근 입니다.");
+                    window.location.href = "/login";
+                }
+            }
+             else if (status === 463) {
+                // 463 에러: 펫을 획득 요청
+                if (!isAlertDisplayed) {
+                    isAlertDisplayed = true;
+                    alert("첫 자가 문진표 작성입니다.");
                 }
             }
         }
