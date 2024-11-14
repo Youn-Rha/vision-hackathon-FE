@@ -1,6 +1,6 @@
-import nutriendtsIcon from "@/assets/PointButton/nutrients.png";
-import sunIcon from "@/assets/PointButton/sun.png";
-import waterIcon from "@/assets/PointButton/water.png";
+import nutriendtsIcon from "@/assets/pointButton/nutrients.png";
+import sunIcon from "@/assets/pointButton/sun.png";
+import waterIcon from "@/assets/pointButton/water.png";
 
 import { Text } from "../Text";
 import * as Styles from "./index.style";
