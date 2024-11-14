@@ -76,6 +76,15 @@ axiosInstance.interceptors.response.use(
                     alert("다시 로그인 해 주세요.");
                     window.location.href = "/login";
                 }
+            } else if (status === 404) {
+                // 404 에러: 멤버에 해당하는 정보 없음 오류
+                useAuthStore.getState().clearAuth();
+                localStorage.setItem("redirectPath", window.location.pathname);
+                if (!isAlertDisplayed) {
+                    isAlertDisplayed = true;
+                    alert("다시 로그인 해 주세요.");
+                    window.location.href = "/login";
+                }
             } else if (status === 462) {
                 // 462 에러: 펫을 획득 요청
                 if (!isAlertDisplayed) {
@@ -83,16 +92,14 @@ axiosInstance.interceptors.response.use(
                     alert("펫을 획득해주세요.");
                     window.location.href = "/character/setting";
                 }
-            }
-             else if (status === 460) {
+            } else if (status === 460) {
                 // 460 에러: 펫을 획득 요청
                 if (!isAlertDisplayed) {
                     isAlertDisplayed = true;
                     alert("잘못된 접근 입니다.");
                     window.location.href = "/login";
                 }
-            }
-             else if (status === 463) {
+            } else if (status === 463) {
                 // 463 에러: 펫을 획득 요청
                 if (!isAlertDisplayed) {
                     isAlertDisplayed = true;

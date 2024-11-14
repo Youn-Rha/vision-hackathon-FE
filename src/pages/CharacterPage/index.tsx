@@ -10,7 +10,7 @@ import { useGetPoint } from "@/hooks/CharacterPage/useGetPoint";
 import { useUpGradeExperience } from "@/hooks/CharacterPage/useUpGradeExperience";
 
 import * as Styles from "./index.style";
-import { GrowBar } from "@/components/GrowBar";
+import { GrowBar1 } from "@/components/GrowBar1";
 
 export const CharacterPage = () => {
     const navigate = useNavigate();
@@ -59,7 +59,7 @@ export const CharacterPage = () => {
             </Styles.CharacterItem>
 
             <Styles.BarContainer>
-                <GrowBar experience={experience} />
+                <GrowBar1 experience={experience} />
                 <Text size="s" color="gray" weight="normal">
                     보유 포인트: {point} point
                 </Text>
