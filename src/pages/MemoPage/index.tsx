@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "../../components/Button";
 import * as Styles from "./index.style";
 import { PageBar } from "../../components/PageBar";
