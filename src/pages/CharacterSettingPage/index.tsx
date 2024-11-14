@@ -1,22 +1,18 @@
-import { useRef, useState, useCallback, useEffect } from "react";
+import React, { useRef, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { Button } from "@/components/Button";
 import { Temp } from "@/components/Temp";
 import { Text } from "@/components/Text";
-
 import { useSettingCharacter } from "@/hooks/CharacterSettingPage/useSettingCharacter";
-
 import * as Styles from "./index.style";
 
 export const CharacterSettingPage = () => {
-    const [characterName, setCharacterName] = useState("character");
+    const navigate = useNavigate();
     const inputRef = useRef<HTMLInputElement | null>(null);
     const [isPopUpOpen, setIsPopUpOpen] = useState(false);
 
-    const navigate = useNavigate();
-
-    const { message, handleCharacterName } = useSettingCharacter();
+    // 훅에서 이름과 메시지, 이름 설정 함수 가져오기
+    const { characterName, message, handleCharacterName } = useSettingCharacter("new");
 
     const handlePopUp = useCallback(() => {
         setIsPopUpOpen((prev) => !prev);
@@ -30,15 +26,15 @@ export const CharacterSettingPage = () => {
 
     const updateName = useCallback(() => {
         if (inputRef.current) {
-            setCharacterName(inputRef.current.value);
+            const newName = inputRef.current.value;
+            handleCharacterName(newName); // 새 이름 설정 및 API 호출
         }
         handlePopUp();
-        handleCharacterName(characterName);
-    }, [handlePopUp]);
+    }, [handleCharacterName, handlePopUp]);
 
     const handleNextPage = useCallback(() => {
         navigate("/character/start");
-    }, []);
+    }, [navigate]);
 
     return (
         <Styles.Container>
