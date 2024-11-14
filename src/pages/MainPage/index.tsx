@@ -28,19 +28,15 @@ export const MainPage = () => {
     const handleCalendarClick = () => {
         navigate("/memo");
     };
-
     const handleUserClick = () => {
         navigate("/mypage");
     };
-
     const handleChatClick = () => {
         navigate("/chat");
     };
-
     const handleCharacterClick = () => {
         navigate("/character");
     };
-
     const handlePopUp = useCallback(() => {
         setIsPopUpOpen((prev) => !prev);
     }, []);
