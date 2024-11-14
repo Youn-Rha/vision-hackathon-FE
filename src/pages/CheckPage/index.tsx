@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { getAllSurveyResults, saveSurveyResult } from "../../apis/survey/survey";
 import { Button } from "../../components/Button";
@@ -22,6 +23,7 @@ const questions = [
 export const CheckPage = (): JSX.Element => {
     const [answers, setAnswers] = useState<{ [key: number]: number }>({});
     const [initialAnswers, setInitialAnswers] = useState<number[]>([]); // 초기 불러온 answer 상태
+    const navi = useNavigate();
 
     useEffect(() => {
         // 불러온 데이터를 초기 상태로 설정
@@ -63,6 +65,7 @@ export const CheckPage = (): JSX.Element => {
         try {
             const response = await saveSurveyResult(answerArray);
             console.log("Answers submitted successfully:", response.message);
+            navi("/check/end");
         } catch (error) {
             console.error("Failed to submit answers:", error);
         }
