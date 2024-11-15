@@ -10,7 +10,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 
-    gap: 40px;
+    gap: 20px;
 `;
 
 export const Header = styled.div`
@@ -56,7 +56,7 @@ export const HeaderIcons = styled.div`
 
 export const QContainer = styled.button`
     width: 100%;
-    min-height: 200px;
+    min-height: 120px;
 
     background-color: var(--color-secondary);
 
@@ -66,7 +66,7 @@ export const QContainer = styled.button`
     flex-direction: column;
 
     padding: 30px;
-    gap: 40px;
+    gap: 30px;
 
     margin-top: 20px;
 

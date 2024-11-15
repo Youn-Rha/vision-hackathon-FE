@@ -22,17 +22,20 @@ export const MemoPage = (): JSX.Element => {
     const calendarRef = useRef<HTMLDivElement | null>(null);
     const navigate = useNavigate();
 
-    // 오늘 날짜를 문자열 형식으로 가져오기
-    const today = new Date().toISOString().split("T")[0];
+    // 오늘 날짜를 한국 시간대로 가져오기
+    const today = new Date(new Date().getTime() + 9 * 60 * 60 * 1000).toISOString().split("T")[0];
 
     useEffect(() => {
         const fetchMemosForMonth = async () => {
-            const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
+            // const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
             const monthMemos: Memo[] = [];
+            const todayDay = new Date(new Date().getTime() + 9 * 60 * 60 * 1000).getDate();
 
-            for (let day = 1; day <= daysInMonth; day++) {
+            for (let day = todayDay - 5; day <= todayDay; day++) {
                 const date = `${currentYear}-${String(currentMonth).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-                const timestamp = new Date(date).toISOString().split(".")[0];
+                const localDate = new Date(`${date}T00:00:00+09:00`); // 한국 시간대 적용
+                const timestamp = localDate.toISOString().split(".")[0];
+
                 try {
                     const fetchedMemos = await getMemosByDate(timestamp);
                     fetchedMemos.forEach((memo) => {
@@ -55,7 +58,7 @@ export const MemoPage = (): JSX.Element => {
 
     // 오늘 날짜 설정 및 캘린더 위치 조정
     useEffect(() => {
-        const currentDate = new Date();
+        const currentDate = new Date(new Date().getTime() + 9 * 60 * 60 * 1000);
         const formattedDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`;
         setSelectedDate(formattedDate);
 
@@ -74,7 +77,12 @@ export const MemoPage = (): JSX.Element => {
     const addMemo = useCallback(async () => {
         if (inputRef.current) {
             const content = inputRef.current.value;
-            const newMemo = { date: selectedDate, timestamp: new Date().toISOString().split(".")[0], content };
+
+            // 한국 시간대에 맞춰 timestamp 생성
+            const now = new Date(new Date().getTime() + 9 * 60 * 60 * 1000);
+            const newTimestamp = now.toISOString().slice(0, 19); // 소수점 이하 제외
+
+            const newMemo = { date: selectedDate, timestamp: newTimestamp, content };
             setMemos((prevMemos) => [...prevMemos, newMemo]);
 
             try {
@@ -105,16 +113,16 @@ export const MemoPage = (): JSX.Element => {
                     <Styles.SelectWrapper>
                         <Styles.Select onChange={(e) => setCurrentYear(Number(e.target.value))} value={currentYear}>
                             {[2023, 2024, 2025].map((year) => (
-                                <option key={year} value={year}>
+                                <Styles.Option key={year} value={year}>
                                     {year}년
-                                </option>
+                                </Styles.Option>
                             ))}
                         </Styles.Select>
                         <Styles.Select onChange={(e) => setCurrentMonth(Number(e.target.value))} value={currentMonth}>
                             {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
-                                <option key={month} value={month}>
+                                <Styles.Option key={month} value={month}>
                                     {month}월
-                                </option>
+                                </Styles.Option>
                             ))}
                         </Styles.Select>
                     </Styles.SelectWrapper>

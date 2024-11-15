@@ -1,14 +1,13 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
-    max-width: 400px;
+    max-width: 440px;
     height: 100vh;
     margin: 0 auto;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 
     gap: 60px;
 `;
@@ -48,12 +47,23 @@ export const Logo = styled.button`
 
 export const CharacterItem = styled.div`
     width: 100%;
+    position: relative; /* 자식 요소들 위치 고정을 위한 상대 위치 */
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
+    
+    & > *:first-child {
+        position: absolute;
+        top: -30px; /* 상단 텍스트 위치 고정 */
+    }
+    
+    & > *:last-child {
+        position: absolute;
+        bottom: -30px; /* 하단 텍스트 위치 고정 */
+    }
 `;
 
 export const BarContainer = styled.div`
