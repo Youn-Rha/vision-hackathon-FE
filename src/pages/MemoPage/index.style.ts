@@ -31,16 +31,29 @@ export const SelectWrapper = styled.div`
 `;
 
 export const Select = styled.select`
-    padding: 5px 10px;
+    padding: 8px 12px;
     font-size: 16px;
     border: 1px solid var(--color-gray);
-    border-radius: 4px;
-    background-color: #ffffff;
-    color: #333;
+    border-radius: 8px;
+    background-color: var(--color-white);
+    color: var(--color-darkgray);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
 
     &:focus {
         outline: none;
         border-color: var(--color-primary);
+    }
+`;
+
+export const Option = styled.option`
+    font-size: 16px;
+    padding: 10px;
+    background-color: var(--color-white);
+    color: var(--color-darkgray);
+
+    &:hover {
+        background-color: var(--color-lightgray);
     }
 `;
 
@@ -67,7 +80,7 @@ export const DateItem = styled.div<{ isSelected: boolean; isToday: boolean }>`
     cursor: pointer;
     font-size: 16px;
     color: ${({ isSelected }) => (isSelected ? "#ffffff" : "#333")};
-    background-color: ${({ isSelected, isToday }) => (isSelected ? "#4caf50" : isToday ? "#e0e0e0" : "transparent")};
+    background-color: ${({ isSelected, isToday }) => (isSelected ? "var(--color-primary)" : isToday ? "#e0e0e0" : "transparent")};
     border-radius: 20px;
     padding: 5px 10px;
     min-width: 60px;
@@ -124,7 +137,7 @@ export const AddButton = styled.button`
     font-size: 40px;
     padding: 10px 20px;
     cursor: pointer;
-    background-color: #4caf50;
+    background-color: var(--color-primary);
     color: #ffffff;
 
     border-radius: 30px;
