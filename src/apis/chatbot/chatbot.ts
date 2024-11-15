@@ -54,12 +54,12 @@ export const getGeminiSelfTest = async (): Promise<GeminiSelfTestResponse> => {
 
 /**
  * 채팅 기록 불러오기 (GET /api/chatbot/get/{type}/{localDateTime})
- * @param type 채팅 타입 ("chat" 또는 "diary")
+ * @param type 채팅 타입 ("chat")
  * @param localDateTime 조회할 날짜/시간 (YYYY-MM-DDTHH:mm:ss 형식)
  * @returns {Promise<ChatEntry[]>} 채팅 기록 배열
  */
 export const getChatHistory = async (
-    type: "chat" | "diary",
+    type: "chat",
     localDateTime: string
 ): Promise<ChatEntry[]> => {
     const response = await axiosInstance.get<ChatEntry[]>(`/api/chatbot/get/${type}/${localDateTime}`);

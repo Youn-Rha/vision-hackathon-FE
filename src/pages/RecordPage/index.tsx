@@ -5,11 +5,27 @@ import { PageBar } from "@/components/PageBar";
 import { Text } from "@/components/Text";
 import { TextArea } from "@/components/TextArea";
 
+import { useGetResponsesByDate, useGetDiariesByDate, useGetChatHistory } from "@/hooks/RecordPage/useGetRecord";
+
 import * as Styles from "./index.style";
 
 export const RecordPage = () => {
     const [date, setDate] = useState(new Date());
     const [active, setActive] = useState(0);
+    const formattedDate = date.toISOString().split("T")[0]; // YYYY-MM-DD 형식으로 변환
+    const formattedDateTime = date.toISOString().split(".")[0]; // 소수점 없는 형식
+
+    const { question, response, loading: loading, error: error } = useGetResponsesByDate(formattedDate);
+    const { data: diaryData, loading: loadingDiaries, error: errorDiaries } = useGetDiariesByDate(formattedDate);
+    // const messages: { variant: "AI" | "USER"; text: string; spacing: number }[] = [
+    //     { variant: "AI", text: "무엇을 도와드릴까요?", spacing: 5 },
+    //     { variant: "USER", text: "안녕하세요", spacing: 25 },
+    //     { variant: "AI", text: "안녕하세요! 무엇을 도와드릴까요?", spacing: 5 },
+    //     { variant: "USER", text: "오늘 날씨가 어떤가요?", spacing: 25 },
+    //     { variant: "AI", text: "오늘 날씨는 맑고 화창합니다!", spacing: 5 },
+    //     { variant: "USER", text: "감사합니다!", spacing: 25 },
+    // ];
+    const { data: messages, loading: loadingChat, error: errorChat } = useGetChatHistory("chat", formattedDateTime);
 
     const handleTabClick = (index: number) => {
         setActive(index);
@@ -22,15 +38,6 @@ export const RecordPage = () => {
     const handleNextDay = () => {
         setDate((prevDate) => new Date(prevDate.getTime() + 24 * 60 * 60 * 1000));
     };
-
-    const messages: { variant: "AI" | "USER"; text: string; spacing: number }[] = [
-        { variant: "AI", text: "무엇을 도와드릴까요?", spacing: 5 },
-        { variant: "USER", text: "안녕하세요", spacing: 25 },
-        { variant: "AI", text: "안녕하세요! 무엇을 도와드릴까요?", spacing: 5 },
-        { variant: "USER", text: "오늘 날씨가 어떤가요?", spacing: 25 },
-        { variant: "AI", text: "오늘 날씨는 맑고 화창합니다!", spacing: 5 },
-        { variant: "USER", text: "감사합니다!", spacing: 25 },
-    ];
 
     return (
         <Styles.Container>
@@ -65,50 +72,48 @@ export const RecordPage = () => {
             {active === 0 && (
                 <Styles.TextContainer>
                     <Text size="m" color="black" weight="bold">
-                        💡 오늘 소소하게 느낀 행복이 있나요?
+                        {loading ? "로딩 중..." : error ? "오류 발생" : question}
                     </Text>
-                    <TextArea variant="primary" readOnly={true}>
-                        붕어빵을 사 먹었음
-                    </TextArea>
+                    <TextArea
+                        variant="primary"
+                        readOnly={true}
+                        value={loading ? "로딩 중..." : error ? "오류 발생" : response}
+                    ></TextArea>
                 </Styles.TextContainer>
             )}
             {active === 1 && (
                 <Styles.TabContent>
-                    <Styles.TextContainer>
-                        <Text size="m" color="black" weight="bold">
-                            1. 오늘은 어떤 일이 있었나요?
-                        </Text>
-                        <TextArea variant="primary" readOnly={true}>
-                            집에 가는 길에 택시를 탐
-                        </TextArea>
-                    </Styles.TextContainer>
-
-                    <Styles.TextContainer>
-                        <Text size="m" color="black" weight="bold">
-                            2. 오늘은 어떤 일이 있었나요?
-                        </Text>
-                        <TextArea variant="primary" readOnly={true}>
-                            집에 가는 길에 택시를 탐
-                        </TextArea>
-                    </Styles.TextContainer>
-
-                    <Styles.TextContainer>
-                        <Text size="m" color="black" weight="bold">
-                            3. 오늘은 어떤 일이 있었나요?
-                        </Text>
-                        <TextArea variant="primary" readOnly={true}>
-                            집에 가는 길에 택시를 탐
-                        </TextArea>
-                    </Styles.TextContainer>
+                    {[0, 1, 2].map((i) => (
+                        <Styles.TextContainer key={i}>
+                            <Text size="m" color="black" weight="bold">
+                                {`${i + 1}. 오늘은 어떤 일이 있었나요?`}
+                            </Text>
+                            <TextArea
+                                variant="primary"
+                                readOnly={true}
+                                value={
+                                    loadingDiaries
+                                        ? "로딩 중..."
+                                        : errorDiaries
+                                          ? "오류 발생"
+                                          : diaryData[i] || "No entry"
+                                }
+                            ></TextArea>
+                        </Styles.TextContainer>
+                    ))}
                 </Styles.TabContent>
             )}
             {active === 2 && (
                 <Styles.ChatContainer>
-                    {messages.map((message, index) => (
-                        <Styles.MessageWrapper key={index} variant={message.variant}>
-                            <Chat variant={message.variant}>{message.text}</Chat>
-                        </Styles.MessageWrapper>
-                    ))}
+                    {loadingChat
+                        ? "로딩 중..."
+                        : errorChat
+                          ? "오류 발생"
+                          : messages.map((message, index) => (
+                                <Styles.MessageWrapper key={index} variant={message.variant}>
+                                    <Chat variant={message.variant}>{message.text}</Chat>
+                                </Styles.MessageWrapper>
+                            ))}
                 </Styles.ChatContainer>
             )}
         </Styles.Container>
