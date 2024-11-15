@@ -55,4 +55,5 @@ export const InputContainer = styled.div`
 export const MessageWrapper = styled.div<{ variant: "AI" | "USER" }>`
     display: flex;
     justify-content: ${(props) => (props.variant === "USER" ? "flex-end" : "flex-start")};
+    color: ${(props) => (props.variant === "USER" ? "white" : "black")}
 `;
