@@ -20,7 +20,7 @@ export const useGetResponsesByDate = (localDate: string) => {
                 setQuestion(responses.length > 0 ? responses[0].question : "오늘 질문이 없습니다.");
                 setResponse(responses.length > 0 ? responses[0].response : "아직 작성하지 않았어요");
             } catch (err) {
-                setError("Failed to fetch responses");
+                setError("Failed to fetch responses " + err);
             } finally {
                 setLoading(false);
             }
@@ -50,7 +50,7 @@ export const useGetDiariesByDate = (localDate: string) => {
                     diaries[2]?.content || "아직 작성하지 않았어요.",
                 ]);
             } catch (err) {
-                setError("Failed to fetch diaries");
+                setError("Failed to fetch diaries " + err);
             } finally {
                 setLoading(false);
             }
@@ -87,7 +87,7 @@ export const useGetChatHistory = (type: "chat", localDateTime: string) => {
                     ]),
                 );
             } catch (err) {
-                setError("Failed to fetch chat history");
+                setError("Failed to fetch chat history " + err);
             } finally {
                 setLoading(false);
             }
