@@ -117,6 +117,4 @@ export const FixedHeader = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 10;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 `;

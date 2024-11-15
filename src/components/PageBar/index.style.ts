@@ -4,7 +4,8 @@ import backArrow from "../../assets/backarrow.png";
 
 export const Container = styled.div`
     height: 70px;
-    width: 100%;
+    width: 440px;
+    margin: 0 auto;
 
     background-color: var(--color-white);
     border-bottom-style: solid;

@@ -20,9 +20,9 @@ export const TextContainer = styled.div`
 `;
 
 export const Wrapper = styled.div`
-    margin-top: 300px;
+    margin-top: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 120px;
+    gap: 220px;
 `;

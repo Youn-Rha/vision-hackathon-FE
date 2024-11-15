@@ -22,9 +22,6 @@ export const FixedHeader = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-
-    z-index: 10;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 `;
 
 export const TextContainer = styled.div`
