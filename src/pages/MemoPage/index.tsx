@@ -1,4 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Button } from "../../components/Button";
 import { PageBar } from "../../components/PageBar";
 import * as Styles from "./index.style";
@@ -18,6 +20,7 @@ export const MemoPage = (): JSX.Element => {
     const [isPopUpOpen, setIsPopUpOpen] = useState(false);
     const inputRef = useRef<HTMLTextAreaElement | null>(null);
     const calendarRef = useRef<HTMLDivElement | null>(null);
+    const navigate = useNavigate();
 
     // 오늘 날짜를 문자열 형식으로 가져오기
     const today = new Date().toISOString().split("T")[0];
@@ -90,9 +93,13 @@ export const MemoPage = (): JSX.Element => {
 
     const daysInMonth = getDaysInMonth(currentYear, currentMonth);
 
+    const handleBackArrow = () => {
+        navigate("/main");
+    };
+
     return (
         <Styles.ScreenContainer>
-            <PageBar pageName="메모 보기" />
+            <PageBar pageName="메모 보기" onClick={handleBackArrow} />
             <Styles.UpWrapper>
                 <Styles.Header>
                     <Styles.SelectWrapper>

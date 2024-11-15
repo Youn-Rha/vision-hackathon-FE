@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Chat } from "@/components/Chat";
 import { PageBar } from "@/components/PageBar";
@@ -12,6 +13,7 @@ import * as Styles from "./index.style";
 export const RecordPage = () => {
     const [date, setDate] = useState(new Date());
     const [active, setActive] = useState(0);
+
     const formattedDate = date.toISOString().split("T")[0]; // YYYY-MM-DD 형식으로 변환
     const formattedDateTime = date.toISOString().split(".")[0]; // 소수점 없는 형식
 
@@ -27,6 +29,9 @@ export const RecordPage = () => {
     // ];
     const { data: messages, loading: loadingChat, error: errorChat } = useGetChatHistory("chat", formattedDateTime);
 
+    const navigate = useNavigate();
+
+
     const handleTabClick = (index: number) => {
         setActive(index);
     };
@@ -39,10 +44,26 @@ export const RecordPage = () => {
         setDate((prevDate) => new Date(prevDate.getTime() + 24 * 60 * 60 * 1000));
     };
 
+
+
+    const handleBackArrow = () => {
+        navigate("/mypage");
+    };
+
+    const messages: { variant: "AI" | "USER"; text: string; spacing: number }[] = [
+        { variant: "AI", text: "무엇을 도와드릴까요?", spacing: 5 },
+        { variant: "USER", text: "안녕하세요", spacing: 25 },
+        { variant: "AI", text: "안녕하세요! 무엇을 도와드릴까요?", spacing: 5 },
+        { variant: "USER", text: "오늘 날씨가 어떤가요?", spacing: 25 },
+        { variant: "AI", text: "오늘 날씨는 맑고 화창합니다!", spacing: 5 },
+        { variant: "USER", text: "감사합니다!", spacing: 25 },
+    ];
+
+
     return (
         <Styles.Container>
             <Styles.FixedHeader>
-                <PageBar pageName="내 기록 보기" />
+                <PageBar pageName="내 기록 보기" onClick={handleBackArrow} />
             </Styles.FixedHeader>
 
             <Styles.DateContainer>

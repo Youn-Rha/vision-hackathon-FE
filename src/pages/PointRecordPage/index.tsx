@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { PointRecord } from "@/components/PointRecord";
 
 import { useGetPointRecord } from "@/hooks/PointRecordPage/useGetPointRecord";
@@ -8,11 +10,16 @@ import * as Styles from "./index.style";
 
 export const PointRecordPage = () => {
     const { data: recordList } = useGetPointRecord(); // data 배열을 recordList로 가져옴
+    const navigate = useNavigate();
+
+    const heandleBackArrow = () => {
+        navigate("/character");
+    };
 
     return (
         <Styles.Container>
             <Styles.FixedHeader>
-                <PageBar pageName="포인트 조회" />
+                <PageBar pageName="포인트 조회" onClick={heandleBackArrow} />
             </Styles.FixedHeader>
             <br />
             <Text size="l" weight="bold" color="black">

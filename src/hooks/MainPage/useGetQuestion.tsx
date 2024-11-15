@@ -13,12 +13,17 @@ export const useGetQuestion = () => {
     const [data, setData] = useState<IQuestion>({ id: 1, question: "", AnsweredToday: false, answer: "" });
 
     const fetchData = useCallback(async () => {
-        const response = await getRandomQuestion();
-        setData(response);
+        try {
+            const response = await getRandomQuestion();
+            console.log("API Response:", response);
+            setData(response);
+        } catch (error) {
+            console.error("Error fetching question:", error);
+        }
     }, []);
 
     useEffect(() => {
         fetchData();
     }, [fetchData]);
-    return { ...data };
+    return { ...data, fetchData };
 };
