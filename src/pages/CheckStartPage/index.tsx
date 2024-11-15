@@ -1,17 +1,23 @@
 import { useNavigate } from "react-router-dom";
+
+import { useMyPage } from "@/hooks/MyPage/useMyPage";
+
 import { Button } from "../../components/Button";
 import { PageBar } from "../../components/PageBar";
 import { Text } from "../../components/Text";
 import * as Styles from "./index.style";
-import { useMyPage } from "@/hooks/MyPage/useMyPage";
 
 export const CheckStartPage = () => {
     const { userData, loading } = useMyPage();
     const navi = useNavigate();
 
+    const handleBackArrow = () => {
+        navi("/mypage");
+    };
+
     return (
         <Styles.Container>
-            <PageBar pageName="문진표 작성" />
+            <PageBar pageName="문진표 작성" onClick={handleBackArrow} />
             <Styles.Wrapper>
                 <Styles.TextContainer>
                     <Text size="l" weight="normal" color="white">

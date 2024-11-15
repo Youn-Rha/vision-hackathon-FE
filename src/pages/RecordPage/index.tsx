@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Chat } from "@/components/Chat";
 import { PageBar } from "@/components/PageBar";
@@ -10,6 +11,7 @@ import * as Styles from "./index.style";
 export const RecordPage = () => {
     const [date, setDate] = useState(new Date());
     const [active, setActive] = useState(0);
+    const navigate = useNavigate();
 
     const handleTabClick = (index: number) => {
         setActive(index);
@@ -21,6 +23,10 @@ export const RecordPage = () => {
 
     const handleNextDay = () => {
         setDate((prevDate) => new Date(prevDate.getTime() + 24 * 60 * 60 * 1000));
+    };
+
+    const handleBackArrow = () => {
+        navigate("/mypage");
     };
 
     const messages: { variant: "AI" | "USER"; text: string; spacing: number }[] = [
@@ -35,7 +41,7 @@ export const RecordPage = () => {
     return (
         <Styles.Container>
             <Styles.FixedHeader>
-                <PageBar pageName="내 기록 보기" />
+                <PageBar pageName="내 기록 보기" onClick={handleBackArrow} />
             </Styles.FixedHeader>
 
             <Styles.DateContainer>

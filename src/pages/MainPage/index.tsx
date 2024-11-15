@@ -37,6 +37,9 @@ export const MainPage = () => {
     const handleCharacterClick = () => {
         navigate("/character");
     };
+    const handleLogoClick = () => {
+        navigate("/main");
+    };
     const handlePopUp = useCallback(() => {
         setIsPopUpOpen((prev) => !prev);
     }, []);
@@ -52,7 +55,7 @@ export const MainPage = () => {
     return (
         <Styles.Container>
             <Styles.Header>
-                <Styles.Logo>Logo</Styles.Logo>
+                <Styles.Logo onClick={handleLogoClick}>Logo</Styles.Logo>
                 <Styles.HeaderIcons>
                     <IconButton variant="calendar" onClick={handleCalendarClick} />
                     <IconButton variant="user" onClick={handleUserClick} />

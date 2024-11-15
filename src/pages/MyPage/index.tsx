@@ -1,5 +1,11 @@
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { Button } from "@/components/Button";
+
 import { useGetCharacter } from "@/hooks/CharacterPage/useGetCharacter";
+import { useSettingCharacter } from "@/hooks/CharacterSettingPage/useSettingCharacter";
+
 import Character from "../../assets/react.svg";
 import { CharacterBG } from "../../components/CharacterBG";
 import { PageBar } from "../../components/PageBar";
@@ -7,9 +13,6 @@ import { Text } from "../../components/Text";
 import { useMyPage } from "../../hooks/MyPage/useMyPage";
 import * as Styles from "./index.style";
 import { withdrawMember } from "@/apis/auth/member";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useSettingCharacter } from "@/hooks/CharacterSettingPage/useSettingCharacter";
-import { Button } from "@/components/Button";
 
 export const MyPage = () => {
     const { userData, loading } = useMyPage();
@@ -39,11 +42,15 @@ export const MyPage = () => {
         handlePopUp();
     }, [handleCharacterName, handlePopUp, refetchCharacter]);
 
+    const handleBackArrow = () => {
+        navi("/main");
+    };
+
     return (
         <Styles.Container>
-            <PageBar pageName="마이페이지" />
+            <PageBar pageName="마이페이지" onClick={handleBackArrow} />
             <Styles.ProfileContainer>
-                <CharacterBG width="150px" height="150px" imageUrl={Character} onClick={() => navi("/character")}/>
+                <CharacterBG width="150px" height="150px" imageUrl={Character} onClick={() => navi("/character")} />
                 <Styles.NameContainer>
                     <Text size="s" weight="bold">
                         ({name}) {/* name을 표시 */}

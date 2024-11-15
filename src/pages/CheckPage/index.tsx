@@ -25,6 +25,10 @@ export const CheckPage = (): JSX.Element => {
     const [initialAnswers, setInitialAnswers] = useState<number[]>([]); // 초기 불러온 answer 상태
     const navi = useNavigate();
 
+    const handleBackArrow = () => {
+        navi("/mypage");
+    };
+
     useEffect(() => {
         // 불러온 데이터를 초기 상태로 설정
         const fetchInitialAnswers = async () => {
@@ -74,7 +78,7 @@ export const CheckPage = (): JSX.Element => {
     return (
         <Styles.Container>
             <Styles.FixedHeader>
-                <PageBar pageName="문진표 작성" />
+                <PageBar pageName="문진표 작성" onClick={handleBackArrow} />
             </Styles.FixedHeader>
 
             <Styles.QuestionsContainer>
