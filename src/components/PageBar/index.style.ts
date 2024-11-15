@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+import backArrow from "../../assets/backarrow.png";
+
 export const Container = styled.div`
     height: 70px;
     width: 100%;
@@ -14,10 +16,20 @@ export const Container = styled.div`
     gap: 12px;
     flex-shrink: 0;
 `;
-export const Arrow = styled.img`
+export const Arrow = styled.button`
     height: 20px;
     width: 10px;
     margin-left: 20px;
-    display: inline-block;
+
+    background-image: url(${backArrow});
+    background-image: url(${backArrow});
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    background-color: transparent;
+
+    outline: none;
+    border: none;
     cursor: pointer;
 `;
