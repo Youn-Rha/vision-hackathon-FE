@@ -4,6 +4,7 @@ import { Button } from "@/components/Button";
 import { Temp } from "@/components/Temp";
 import { TextArea } from "@/components/TextArea";
 
+import { useGetCharacter } from "@/hooks/CharacterPage/useGetCharacter";
 import { useWriteDiary } from "@/hooks/WriteDiaryPage/useWriteDiary";
 
 import { PageBar } from "../../components/PageBar";
@@ -14,6 +15,7 @@ export const WriteDiaryPage = () => {
     const navigate = useNavigate();
 
     const { answer1Ref, answer2Ref, answer3Ref, handleWriteDiary } = useWriteDiary();
+    const { level } = useGetCharacter();
 
     const handleSubmitClick = () => {
         handleWriteDiary([
@@ -44,7 +46,7 @@ export const WriteDiaryPage = () => {
                 </Text>
             </Styles.TextContainer>
 
-            <Temp width="200px" height="180px"></Temp>
+            <Temp width="200px" height="180px" level={level}></Temp>
 
             <Styles.QContainer>
                 <Text size="m" weight="bold" color="black">

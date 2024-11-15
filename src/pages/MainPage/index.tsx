@@ -7,6 +7,7 @@ import { IconButton } from "@/components/IconButton";
 import { Text } from "@/components/Text";
 import { TextArea } from "@/components/TextArea";
 
+import { useGetCharacter } from "@/hooks/CharacterPage/useGetCharacter";
 import { useGetQuestion } from "@/hooks/MainPage/useGetQuestion";
 import { useGetUser } from "@/hooks/MainPage/useGetUser";
 import { useWriteAnswer } from "@/hooks/MainPage/useWriteAnswer";
@@ -15,9 +16,10 @@ import * as Styles from "./index.style";
 
 export const MainPage = () => {
     const navigate = useNavigate();
-    const { data: name } = useGetUser();
+    const { data: userName } = useGetUser();
     const { id, question, AnsweredToday, answer, fetchData } = useGetQuestion();
     const { handleWriteAnswer: writeAnswer, inputRef } = useWriteAnswer();
+    const { level } = useGetCharacter();
 
     const [isPopUpOpen, setIsPopUpOpen] = useState(false);
 
@@ -38,6 +40,10 @@ export const MainPage = () => {
     const handleLogoClick = () => {
         navigate("/main");
     };
+
+    const handleDiaryClick = () => {
+        navigate("/diary");
+    };
     const handlePopUp = useCallback(() => {
         if (AnsweredToday) return;
         setIsPopUpOpen((prev) => !prev);
@@ -52,8 +58,9 @@ export const MainPage = () => {
     return (
         <Styles.Container>
             <Styles.Header>
-                <Styles.Logo onClick={handleLogoClick}>Logo</Styles.Logo>
+                <Styles.Logo onClick={handleLogoClick}></Styles.Logo>
                 <Styles.HeaderIcons>
+                    <IconButton variant="diary" onClick={handleDiaryClick} />
                     <IconButton variant="calendar" onClick={handleCalendarClick} />
                     <IconButton variant="user" onClick={handleUserClick} />
                     <IconButton variant="chat" onClick={handleChatClick} />
@@ -61,10 +68,10 @@ export const MainPage = () => {
             </Styles.Header>
             <Styles.Header>
                 <Text size="l" color="black" weight="bold">
-                    {name ? name : "user"}님 기다렸어요!
+                    {userName ? userName : "user"}님 기다렸어요!
                 </Text>
             </Styles.Header>
-            <CharacterBG width="350px" height="350px" imageUrl="" onClick={handleCharacterClick}></CharacterBG>
+            <CharacterBG width="350px" height="350px" onClick={handleCharacterClick} level={level}></CharacterBG>
             <Styles.QContainer onClick={handlePopUp}>
                 <Text size="s" color="gray" weight="normal">
                     TODAY - {today.getMonth() + 1}월 {today.getDate()}일

@@ -35,7 +35,7 @@ export const CharacterPage = () => {
     return (
         <Styles.Container>
             <Styles.Header>
-                <Styles.Logo onClick={handleLogoClick}>Logo</Styles.Logo>
+                <Styles.Logo onClick={handleLogoClick}></Styles.Logo>
                 <IconButton variant="book" onClick={handleBookClick} />
             </Styles.Header>
 
@@ -55,7 +55,7 @@ export const CharacterPage = () => {
                         3단계 입니다
                     </Text>
                 )}
-                <Temp width="300px" height="270px" />
+                <Temp width="300px" height="270px" level={level} />
                 <Text size="l" color="black" weight="bold">
                     {name}
                 </Text>
