@@ -35,35 +35,16 @@ jobs:
         npm install
         npm run build
 
+    - name: Install sshpass
+      run: sudo apt-get install -y sshpass  # sshpass 설치
 
-      # 빌드 파일을 서버로 전송
-    - name: Copy build directory to server
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USER }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        source: "./dist/*"
-        target: "/home/rayoen/dist"
-
-      # 복사한 파일 권한 설정 및 Nginx 재시작
-    - name: Move files to target directory and restart Nginx
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USER }}
-        password: ${{ secrets.PASSWORD }}
-        port: ${{ secrets.PORT }}
-        script: |
-          # 대상 폴더가 이미 있는 경우 삭제
-          sudo rm -rf /var/www/html/dist
-          
-          # /home/rayoen/dist의 파일을 /var/www/html/dist로 이동
-          sudo mv /home/rayoen/dist /var/www/html/dist
-
-          # 권한 설정
-          sudo chmod -R 755 /var/www/html/dist
-
-          # Nginx 재시작
-          sudo service nginx restart
+    - name: Deploy to Server
+      env:
+        SSH_PASSWORD: ${{ secrets.PASSWORD }}
+        SERVER_IP: ${{ secrets.HOST }}
+      run: |
+        # 서버에 /var/www/html/dist 디렉터리가 없으면 생성
+        sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no -p 16122 rayoen@$SERVER_IP "mkdir -p /var/www/html/dist"
+        sshpass -p "$SSH_PASSWORD" scp -o StrictHostKeyChecking=no -P 16122 -r dist/* rayoen@$SERVER_IP:/var/www/html/dist/
+        sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no -p 16122 rayoen@$SERVER_IP "chmod -R 755 /var/www/html/dist"
+        sshpass -p "$SSH_PASSWORD" ssh -o StrictHostKeyChecking=no -p 16122 rayoen@$SERVER_IP "sudo systemctl restart nginx"
