@@ -21,6 +21,11 @@ export const RecordPage = () => {
     const { data: diaryData, loading: loadingDiaries, error: errorDiaries } = useGetDiariesByDate(formattedDate);
 
     const { data: messages, loading: loadingChat, error: errorChat } = useGetChatHistory("chat", formattedDateTime);
+    const diary_question = [
+        "1. 오늘은 어떤 일이 있었나요?",
+        "2. 오늘의 감정은 어땠나요?",
+        "3. 오늘의 하루를 한 줄로 표현해보세요.",
+    ];
 
     const navigate = useNavigate();
 
@@ -87,7 +92,7 @@ export const RecordPage = () => {
                     {[0, 1, 2].map((i) => (
                         <Styles.TextContainer key={i}>
                             <Text size="m" color="black" weight="bold">
-                                {`${i + 1}. 오늘은 어떤 일이 있었나요?`}
+                                {diary_question[i]}
                             </Text>
                             <TextArea
                                 variant="primary"
