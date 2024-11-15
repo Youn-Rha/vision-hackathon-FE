@@ -19,18 +19,10 @@ export const RecordPage = () => {
 
     const { question, response, loading: loading, error: error } = useGetResponsesByDate(formattedDate);
     const { data: diaryData, loading: loadingDiaries, error: errorDiaries } = useGetDiariesByDate(formattedDate);
-    // const messages: { variant: "AI" | "USER"; text: string; spacing: number }[] = [
-    //     { variant: "AI", text: "무엇을 도와드릴까요?", spacing: 5 },
-    //     { variant: "USER", text: "안녕하세요", spacing: 25 },
-    //     { variant: "AI", text: "안녕하세요! 무엇을 도와드릴까요?", spacing: 5 },
-    //     { variant: "USER", text: "오늘 날씨가 어떤가요?", spacing: 25 },
-    //     { variant: "AI", text: "오늘 날씨는 맑고 화창합니다!", spacing: 5 },
-    //     { variant: "USER", text: "감사합니다!", spacing: 25 },
-    // ];
+
     const { data: messages, loading: loadingChat, error: errorChat } = useGetChatHistory("chat", formattedDateTime);
 
     const navigate = useNavigate();
-
 
     const handleTabClick = (index: number) => {
         setActive(index);
@@ -44,21 +36,9 @@ export const RecordPage = () => {
         setDate((prevDate) => new Date(prevDate.getTime() + 24 * 60 * 60 * 1000));
     };
 
-
-
     const handleBackArrow = () => {
         navigate("/mypage");
     };
-
-    const messages: { variant: "AI" | "USER"; text: string; spacing: number }[] = [
-        { variant: "AI", text: "무엇을 도와드릴까요?", spacing: 5 },
-        { variant: "USER", text: "안녕하세요", spacing: 25 },
-        { variant: "AI", text: "안녕하세요! 무엇을 도와드릴까요?", spacing: 5 },
-        { variant: "USER", text: "오늘 날씨가 어떤가요?", spacing: 25 },
-        { variant: "AI", text: "오늘 날씨는 맑고 화창합니다!", spacing: 5 },
-        { variant: "USER", text: "감사합니다!", spacing: 25 },
-    ];
-
 
     return (
         <Styles.Container>
