@@ -22,12 +22,14 @@ export const Header = styled.div`
     align-items: center;
 `;
 
-export const Logo = styled.div`
+export const Logo = styled.button`
     width: 175px;
     height: 60px;
 
     background-color: var(--color-gray);
     border-radius: 15px;
+    border: 0;
+    outline: 0;
 
     display: flex;
     justify-content: center;
@@ -35,6 +37,13 @@ export const Logo = styled.div`
 
     font-size: var(--font-size-l);
     font-weight: bold;
+
+    &:focus {
+        outline: none;
+    }
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const CharacterItem = styled.div`

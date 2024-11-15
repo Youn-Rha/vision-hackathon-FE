@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
+import { GrowBar1 } from "@/components/GrowBar1";
 import { IconButton } from "@/components/IconButton";
 import { PointButton } from "@/components/PointButton";
 import { Temp } from "@/components/Temp";
@@ -10,7 +11,6 @@ import { useGetPoint } from "@/hooks/CharacterPage/useGetPoint";
 import { useUpGradeExperience } from "@/hooks/CharacterPage/useUpGradeExperience";
 
 import * as Styles from "./index.style";
-import { GrowBar1 } from "@/components/GrowBar1";
 
 export const CharacterPage = () => {
     const navigate = useNavigate();
@@ -28,11 +28,14 @@ export const CharacterPage = () => {
         refetch(); // 경험치 및 캐릭터 데이터 다시 가져오기
         pointRefetch(); // 포인트 데이터 다시 가져오기
     };
+    const handleLogoClick = () => {
+        navigate("/main");
+    };
 
     return (
         <Styles.Container>
             <Styles.Header>
-                <Styles.Logo>Logo</Styles.Logo>
+                <Styles.Logo onClick={handleLogoClick}>Logo</Styles.Logo>
                 <IconButton variant="book" onClick={handleBookClick} />
             </Styles.Header>
 

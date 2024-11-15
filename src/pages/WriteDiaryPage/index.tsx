@@ -25,10 +25,14 @@ export const WriteDiaryPage = () => {
         navigate("/main");
     };
 
+    const handleBackArrow = () => {
+        navigate("/main");
+    };
+
     return (
         <Styles.Container>
             <Styles.FixedHeader>
-                <PageBar pageName="일기 작성" />
+                <PageBar pageName="일기 작성" onClick={handleBackArrow} />
             </Styles.FixedHeader>
 
             <Styles.TextContainer>
