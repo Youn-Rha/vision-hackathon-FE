@@ -35,6 +35,19 @@ jobs:
         npm install
         npm run build
 
+      # 서버에서 기존 dist 디렉터리 삭제
+    - name: Remove existing dist directory on server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          sudo rm -rf /var/www/html/dist
+          sudo mkdir -p /var/www/html/dist
+          sudo chmod -R 755 /var/www/html/dist
+
       # 빌드 파일을 서버로 전송
     - name: Copy build directory to server
       uses: appleboy/scp-action@master
@@ -46,8 +59,8 @@ jobs:
         source: "./dist/*"
         target: "/var/www/html/dist"
 
-      # 원격 서버에서 Nginx 재시작
-    - name: Restart Nginx on server
+      # 복사한 파일 권한 설정 및 Nginx 재시작
+    - name: Set permissions and restart Nginx on server
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
@@ -55,4 +68,5 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
+          sudo chmod -R 755 /var/www/html/dist
           sudo service nginx restart
