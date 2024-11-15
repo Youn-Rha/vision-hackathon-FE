@@ -8,10 +8,11 @@ export interface TextAreaProps extends React.ComponentProps<"textarea"> {
     width?: string;
     height?: string;
     readOnly?: boolean;
+    value?: string;
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-    ({ width, height, variant, placeholder, readOnly, children }, ref) => {
+    ({ width, height, variant, placeholder, readOnly, value, children }, ref) => {
         return (
             <Styles.TextAreaElement
                 ref={ref}
@@ -20,6 +21,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
                 variant={variant}
                 placeholder={placeholder}
                 readOnly={readOnly}
+                value={value}
             >
                 {children}
             </Styles.TextAreaElement>

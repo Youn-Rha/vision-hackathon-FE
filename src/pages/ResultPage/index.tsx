@@ -1,26 +1,19 @@
-import { useState, useEffect } from "react";
-import { PageBar } from "../../components/PageBar";
-import { Temp } from "../../components/Temp";
-import { Text } from "../../components/Text";
+import { PageBar } from "@/components/PageBar";
+import { Temp } from "@/components/Temp";
+import { Text } from "@/components/Text";
 import * as Styles from "./index.style";
 import { TextArea } from "@/components/TextArea";
+import { useGetResult } from "@/hooks/ResultPage/useGetResult";
 
 export const ResultPage = () => {
-    const [data, setData] = useState("");
+    const { data, loading, error } = useGetResult();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch("/api/get-result");
-                const result = await response.json();
-                setData(result.data);
-            } catch (error) {
-                console.error("Failed to fetch data:", error);
-            }
-        };
-
-        fetchData();
-    }, []);
+    // 로딩 중, 에러, 정상 데이터의 상태에 따라 placeholder 내용을 결정
+    const placeholderText = loading
+        ? "로딩 중..."
+        : error
+        ? "데이터를 불러오는 중 문제가 발생했습니다."
+        : "";
 
     return (
         <Styles.Container>
@@ -37,7 +30,12 @@ export const ResultPage = () => {
             
             <Styles.ResultWrapper>
                 <Text size="m" weight="bold">결과</Text>
-                <TextArea variant="primary" readOnly={true} value={data} />
+                <TextArea
+                    variant="primary"
+                    readOnly={true}
+                    value={loading || error ? "" : data}
+                    placeholder={placeholderText}
+                />
             </Styles.ResultWrapper>
         </Styles.Container>
     );

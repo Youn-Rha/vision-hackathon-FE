@@ -38,20 +38,17 @@ export const saveChatHistory = async (
     return response.data;
 };
 
+interface GeminiSelfTestResponse {
+    response: string;
+    type: "chat";
+}
+
 /**
- * Gemini 자가 진단 (GET /api/chatbot/selftest)
- * @returns {Promise<{ totalScore: number; question: { num: number; score: number; reason: string }[]; summary: string }>}
+ * Gemini 자가 진단 결과 조회 (GET /api/chatbot/selftest)
+ * @returns {Promise<GeminiSelfTestResponse>} 자가 진단 결과
  */
-export const geminiSelfTest = async (): Promise<{
-    totalScore: number;
-    question: { num: number; score: number; reason: string }[];
-    summary: string;
-}> => {
-    const response = await axiosInstance.get<{
-        totalScore: number;
-        question: { num: number; score: number; reason: string }[];
-        summary: string;
-    }>("/api/chatbot/selftest");
+export const getGeminiSelfTest = async (): Promise<GeminiSelfTestResponse> => {
+    const response = await axiosInstance.get<GeminiSelfTestResponse>("/api/chatbot/selftest");
     return response.data;
 };
 
