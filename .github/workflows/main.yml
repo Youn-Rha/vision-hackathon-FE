@@ -43,7 +43,6 @@ jobs:
         SSH_PASSWORD: ${{ secrets.PASSWORD }}
         SERVER_IP: ${{ secrets.HOST }}
       run: |
-        # 서버에 /var/www/html/dist 디렉터리가 없으면 생성
         sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no -p 16122 rayoen@$HOST "mkdir -p /var/www/html/dist"
         sshpass -p "$PASSWORD" scp -o StrictHostKeyChecking=no -P 16122 -r dist/* rayoen@$HOST:/var/www/html/dist/
         sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no -p 16122 rayoen@$HOST "chmod -R 755 /var/www/html/dist"
