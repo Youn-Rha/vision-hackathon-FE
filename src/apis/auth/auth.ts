@@ -50,7 +50,7 @@ export const kakaoLoginCallback_kkia = async (code: string): Promise<{ accessTok
     const response = await axiosInstance.get<{ accessToken: string; refreshToken: string }>(
         "/api/auth/oauth/kakao/callback",
         {
-            baseURL: "https://dandani.site", // 이 요청에서만 baseURL 설정
+            baseURL: "https://kkia.backapi.site", // 이 요청에서만 baseURL 설정
             params: { code },
         },
     );
