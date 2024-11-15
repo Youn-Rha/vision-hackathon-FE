@@ -42,17 +42,17 @@ export const CharacterPage = () => {
             <Styles.CharacterItem>
                 {level === 1 && (
                     <Text size="l" color="black" weight="bold">
-                        1단계 입니다
+                        앞으로 쑥쑥 자랄게요!
                     </Text>
                 )}
                 {level === 2 && (
                     <Text size="l" color="black" weight="bold">
-                        2단계 입니다
+                        점점 더 멋있어지고 있어요! ｡♥‿♥｡
                     </Text>
                 )}
                 {level === 3 && (
                     <Text size="l" color="black" weight="bold">
-                        3단계 입니다
+                        멋지게 자랐어요! •ᴗ•
                     </Text>
                 )}
                 <Temp width="300px" height="270px" level={level} />

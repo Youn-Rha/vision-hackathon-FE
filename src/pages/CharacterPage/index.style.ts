@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import logoImg from "@/assets/logo/logo.png";
 
 export const Container = styled.div`
-    max-width: 440px;
+    max-width: 400px;
     height: 100vh;
     margin: 0 auto;
 
@@ -61,16 +61,18 @@ export const CharacterItem = styled.div`
     justify-content: center;
     align-items: center;
     gap: 20px;
-    
+
     & > *:first-child {
         position: absolute;
         top: -30px; /* 상단 텍스트 위치 고정 */
     }
-    
+
     & > *:last-child {
         position: absolute;
         bottom: -30px; /* 하단 텍스트 위치 고정 */
     }
+
+    padding: 20px;
 `;
 
 export const BarContainer = styled.div`
