@@ -1,4 +1,6 @@
 // import { useState } from "react";
+import { useRef } from "react";
+
 import { createResponse } from "@/apis/question/question";
 
 interface AnswerData {
@@ -7,7 +9,7 @@ interface AnswerData {
 }
 
 export const useWriteAnswer = () => {
-    // const [data, setData] = useState<AnswerData>({questionId: 0, response: "" });
+    const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
     const handleWriteAnswer = async ({ questionId, response }: AnswerData) => {
         try {
@@ -22,5 +24,5 @@ export const useWriteAnswer = () => {
         }
     };
 
-    return { handleWriteAnswer };
+    return { handleWriteAnswer, inputRef };
 };
