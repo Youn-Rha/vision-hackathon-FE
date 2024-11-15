@@ -6,7 +6,6 @@ import { Button } from "@/components/Button";
 import { useGetCharacter } from "@/hooks/CharacterPage/useGetCharacter";
 import { useSettingCharacter } from "@/hooks/CharacterSettingPage/useSettingCharacter";
 
-import Character from "../../assets/react.svg";
 import { CharacterBG } from "../../components/CharacterBG";
 import { PageBar } from "../../components/PageBar";
 import { Text } from "../../components/Text";
@@ -16,7 +15,7 @@ import { withdrawMember } from "@/apis/auth/member";
 
 export const MyPage = () => {
     const { userData, loading } = useMyPage();
-    const { name, refetch: refetchCharacter } = useGetCharacter(); // name과 refetchCharacter 가져오기
+    const { name, level, refetch: refetchCharacter } = useGetCharacter(); // name과 refetchCharacter 가져오기
     const navi = useNavigate();
     const inputRef = useRef<HTMLInputElement | null>(null);
     const [isPopUpOpen, setIsPopUpOpen] = useState(false);
@@ -50,7 +49,7 @@ export const MyPage = () => {
         <Styles.Container>
             <PageBar pageName="마이페이지" onClick={handleBackArrow} />
             <Styles.ProfileContainer>
-                <CharacterBG width="150px" height="150px" imageUrl={Character} onClick={() => navi("/character")} />
+                <CharacterBG width="150px" height="150px" level={level} onClick={() => navi("/character")} />
                 <Styles.NameContainer>
                     <Text size="s" weight="bold">
                         ({name}) {/* name을 표시 */}

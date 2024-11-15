@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+import logoImg from "@/assets/logo/logo.png";
+
 export const Container = styled.div`
     max-width: 440px;
     height: 100vh;
@@ -22,10 +24,10 @@ export const Header = styled.div`
 `;
 
 export const Logo = styled.button`
-    width: 175px;
+    width: 160px;
     height: 60px;
 
-    background-color: var(--color-gray);
+    background-color: var(--color-white);
     border-radius: 15px;
     border: 0;
     outline: 0;
@@ -33,6 +35,11 @@ export const Logo = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-image: url(${logoImg});
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 
     font-size: var(--font-size-l);
     font-weight: bold;

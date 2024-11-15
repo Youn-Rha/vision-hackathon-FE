@@ -4,7 +4,7 @@ export const Container = styled.button<{ width: string; height: string }>`
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     aspect-ratio: 1 / 1;
-    background-color: var(--color-lightgray);
+    background-color: var(--color-white);
     border-radius: 50%;
     box-shadow: 0px 0px 50px -8px var(--color-primary);
 
@@ -18,6 +18,6 @@ export const Container = styled.button<{ width: string; height: string }>`
 `;
 
 export const Character = styled.img`
-    //width: 80%;
+    width: 85%;
     height: auto;
 `;

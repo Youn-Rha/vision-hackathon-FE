@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
 export const ButtonElement = styled.button<{ onClick?: () => void }>`
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
 
     background-color: var(--color-white);
 

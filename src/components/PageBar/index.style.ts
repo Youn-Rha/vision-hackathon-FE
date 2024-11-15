@@ -23,7 +23,6 @@ export const Arrow = styled.button`
     margin-left: 20px;
 
     background-image: url(${backArrow});
-    background-image: url(${backArrow});
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
