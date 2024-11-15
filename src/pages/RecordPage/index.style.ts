@@ -4,8 +4,8 @@ import leftArrow from "@/assets/leftArrow.png";
 import rightArrow from "@/assets/rightArrow.png";
 
 export const Container = styled.div`
-    max-width: 400px;
-    height: 100%;
+    max-width: 440px;
+    height: min(100vh, 956px);
     margin: 0 auto;
 
     display: flex;

@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
+
 import { Text } from "../../components/Text";
 
 export const ScreenContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 400px;
-    height: 100vh;
+    max-width: 440px;
+    height: min(100vh, 956px);
     margin: 0 auto;
     gap: 30px;
 `;
@@ -66,8 +67,7 @@ export const DateItem = styled.div<{ isSelected: boolean; isToday: boolean }>`
     cursor: pointer;
     font-size: 16px;
     color: ${({ isSelected }) => (isSelected ? "#ffffff" : "#333")};
-    background-color: ${({ isSelected, isToday }) =>
-        isSelected ? "#4caf50" : isToday ? "#e0e0e0" : "transparent"};
+    background-color: ${({ isSelected, isToday }) => (isSelected ? "#4caf50" : isToday ? "#e0e0e0" : "transparent")};
     border-radius: 20px;
     padding: 5px 10px;
     min-width: 60px;
@@ -126,7 +126,7 @@ export const AddButton = styled.button`
     cursor: pointer;
     background-color: #4caf50;
     color: #ffffff;
-    
+
     border-radius: 30px;
     width: 70px;
     height: 48px;
