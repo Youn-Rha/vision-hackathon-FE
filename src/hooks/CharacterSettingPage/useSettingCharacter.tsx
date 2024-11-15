@@ -1,8 +1,9 @@
 import { useState } from "react";
+
 import { acquirePet, updatePetName } from "@/apis/pet/pet";
 
 export const useSettingCharacter = (type: "new" | "edit") => {
-    const [characterName, setCharacterName] = useState<string>("character");
+    const [characterName, setCharacterName] = useState<string>("단이");
     const [message, setMessage] = useState<string>("");
 
     const handleCharacterName = async (name: string) => {

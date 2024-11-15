@@ -7,8 +7,8 @@ export const Container = styled.div`
     align-items: center;
     gap: 30px;
 
-    max-width: 400px;
-    height: 100%;
+    max-width: 440px;
+    height: min(100vh, 956px);
     margin: 0 auto;
 
     padding-bottom: 30px;

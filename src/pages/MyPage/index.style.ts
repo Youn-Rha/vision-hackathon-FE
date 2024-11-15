@@ -1,11 +1,10 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
-    max-width: 400px;
-    height: 100vh;
-    max-height: 956px;
+    max-width: 440px;
+    height: min(100vh, 956px);
     margin: 0 auto;
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,7 +56,7 @@ export const EditButton = styled.button`
     margin-left: 10px;
     font-size: 12px;
     font-weight: bold;
-    padding: 4px 8px; 
+    padding: 4px 8px;
     cursor: pointer;
     background-color: var(--color-primary);
     color: var(--color-white);
