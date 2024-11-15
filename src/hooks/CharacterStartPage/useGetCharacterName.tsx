@@ -14,6 +14,7 @@ export const useGetCharacterName = () => {
     useEffect(() => {
         fetchData();
     }, [fetchData]);
+    console.log(data);
 
-    return { data };
+    return { data, fetchData };
 };

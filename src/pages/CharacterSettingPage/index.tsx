@@ -1,9 +1,12 @@
 import { useRef, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { Button } from "@/components/Button";
 import { Temp } from "@/components/Temp";
 import { Text } from "@/components/Text";
+
 import { useSettingCharacter } from "@/hooks/CharacterSettingPage/useSettingCharacter";
+
 import * as Styles from "./index.style";
 
 export const CharacterSettingPage = () => {
@@ -24,10 +27,10 @@ export const CharacterSettingPage = () => {
         }
     }, [message]);
 
-    const updateName = useCallback(() => {
+    const updateName = useCallback(async () => {
         if (inputRef.current) {
             const newName = inputRef.current.value;
-            handleCharacterName(newName); // 새 이름 설정 및 API 호출
+            await handleCharacterName(newName); // 새 이름 설정 및 API 호출
         }
         handlePopUp();
     }, [handleCharacterName, handlePopUp]);
