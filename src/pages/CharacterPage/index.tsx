@@ -20,6 +20,14 @@ export const CharacterPage = () => {
     };
 
     const { name, level, experience, refetch } = useGetCharacter();
+    let experience_scale = 0;
+    if (level === 1) {
+        experience_scale = Math.floor(experience / 1.5);
+    } else if (level === 2) {
+        experience_scale = Math.floor(experience / 3);
+    } else {
+        experience_scale = Math.floor(experience / 4.5);
+    }
     const { point, pointRefetch } = useGetPoint();
     const { upgradeExperience } = useUpGradeExperience();
 
@@ -62,7 +70,7 @@ export const CharacterPage = () => {
             </Styles.CharacterItem>
 
             <Styles.BarContainer>
-                <GrowBar1 experience={experience} />
+                <GrowBar1 experience={experience_scale} />
                 <Text size="s" color="gray" weight="normal">
                     보유 포인트: {point} point
                 </Text>

@@ -80,7 +80,8 @@ export const DateItem = styled.div<{ isSelected: boolean; isToday: boolean }>`
     cursor: pointer;
     font-size: 16px;
     color: ${({ isSelected }) => (isSelected ? "#ffffff" : "#333")};
-    background-color: ${({ isSelected, isToday }) => (isSelected ? "var(--color-primary)" : isToday ? "#e0e0e0" : "transparent")};
+    background-color: ${({ isSelected, isToday }) =>
+        isSelected ? "var(--color-primary)" : isToday ? "#e0e0e0" : "transparent"};
     border-radius: 20px;
     padding: 5px 10px;
     min-width: 60px;
@@ -97,6 +98,10 @@ export const SelectedDate = styled.div`
     width: 100%;
     margin-top: 20px;
     text-align: left;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 `;
 
 export const DayCounter = styled.div`
@@ -120,8 +125,8 @@ export const MemosContainer = styled.div`
 `;
 
 export const MemoItem = styled.div`
-    padding: 10px;
-    border-radius: 8px;
+    padding: 20px;
+    border-radius: 20px;
     background-color: #e0e0e0;
     font-size: 14px;
     line-height: 1.4;
@@ -193,13 +198,24 @@ export const InputContainer = styled.textarea`
     height: 100px;
     padding: 10px;
     font-size: 16px;
-    border-radius: 4px;
+    border-radius: 15px;
     border: 1px solid #ccc;
     resize: none;
+
+    &:focus {
+        outline: none;
+    }
 `;
 
 export const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
     gap: 10px;
+`;
+
+export const ContentContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 `;

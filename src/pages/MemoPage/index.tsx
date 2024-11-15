@@ -1,6 +1,8 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { Text } from "@/components/Text";
+
 import { Button } from "../../components/Button";
 import { PageBar } from "../../components/PageBar";
 import * as Styles from "./index.style";
@@ -148,18 +150,24 @@ export const MemoPage = (): JSX.Element => {
                 </Styles.Calendar>
             </Styles.UpWrapper>
 
-            <Styles.SelectedDate>
-                <Styles.DayCounter>DAY 1</Styles.DayCounter>
-                <Styles.MemoTitle>메모</Styles.MemoTitle>
-            </Styles.SelectedDate>
+            <Styles.ContentContainer>
+                <Styles.SelectedDate>
+                    <Text size="m" weight="bold" color="gray">
+                        DAY
+                    </Text>
+                    <Text size="m" weight="bold" color="black">
+                        메모
+                    </Text>
+                </Styles.SelectedDate>
 
-            <Styles.MemosContainer>
-                {memos
-                    .filter((memo) => memo.date === selectedDate)
-                    .map((memo, index) => (
-                        <Styles.MemoItem key={index}>{memo.content}</Styles.MemoItem>
-                    ))}
-            </Styles.MemosContainer>
+                <Styles.MemosContainer>
+                    {memos
+                        .filter((memo) => memo.date === selectedDate)
+                        .map((memo, index) => (
+                            <Styles.MemoItem key={index}>{memo.content}</Styles.MemoItem>
+                        ))}
+                </Styles.MemosContainer>
+            </Styles.ContentContainer>
 
             {/* 오늘 날짜인 경우에만 추가 버튼 표시 */}
             {selectedDate === today && (
