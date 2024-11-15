@@ -6,16 +6,21 @@ import * as Styles from "./index.style";
 
 export const LoginPage = () => {
     const handleKakaoLogin = () => {
-        window.location.href = 'http://kkia.backapi.site:8080/api/auth/oauth/kakao';
-      };
+        window.location.href = "http://kkia.backapi.site:8080/api/auth/oauth/kakao";
+    };
     return (
         <Styles.Container>
             <Styles.TextContainer>
-                <Text size="xl" color="black" weight="bold">
-                    ___에 오신 것을 환영합니다
-                </Text>
+                <Styles.TextElement>
+                    <Text size="l" color="primary" weight="bold">
+                        "Dan Dan"
+                    </Text>
+                    <Text size="l" color="black" weight="bold">
+                        에 오신 것을 환영합니다
+                    </Text>
+                </Styles.TextElement>
                 <Text size="s" color="gray" weight="normal">
-                    로그인 후 ___ 서비스를 경험해보세요
+                    로그인 후 DanDan 서비스를 경험해보세요
                 </Text>
             </Styles.TextContainer>
             <Temp width="250px" height="220px" />

@@ -20,3 +20,8 @@ export const TextContainer = styled.div`
 
     gap: 20px;
 `;
+
+export const TextElement = styled.div`
+    display: flex;
+    align-items: center;
+`;
