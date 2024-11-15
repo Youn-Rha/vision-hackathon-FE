@@ -3,13 +3,13 @@ import styled from "@emotion/styled";
 import logoImg from "@/assets/logo/logo.png";
 
 export const Container = styled.div`
-    max-width: 400px;
+    max-width: 440px;
     height: 100vh;
     margin: 0 auto;
 
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 
     gap: 20px;

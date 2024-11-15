@@ -57,14 +57,14 @@ export const WriteDiaryPage = () => {
 
             <Styles.QContainer>
                 <Text size="m" weight="bold" color="black">
-                    2. 오늘의 감정은 어땠나요?
+                    2. 당신의 감정을 솔직하게 적어주세요.
                 </Text>
                 <TextArea ref={answer2Ref} variant="primary" width="100%" height="100px"></TextArea>
             </Styles.QContainer>
 
             <Styles.QContainer>
                 <Text size="m" weight="bold" color="black">
-                    3. 오늘의 하루를 한 줄로 표현해보세요.
+                    3. 추가적으로 남기고 싶은 말이 있나요?
                 </Text>
                 <TextArea ref={answer3Ref} variant="primary" width="100%" height="100px"></TextArea>
             </Styles.QContainer>
