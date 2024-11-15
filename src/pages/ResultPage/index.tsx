@@ -4,9 +4,11 @@ import { Text } from "@/components/Text";
 import * as Styles from "./index.style";
 import { TextArea } from "@/components/TextArea";
 import { useGetResult } from "@/hooks/ResultPage/useGetResult";
+import { useNavigate } from "react-router-dom";
 
 export const ResultPage = () => {
     const { data, loading, error } = useGetResult();
+    const navi = useNavigate();
 
     // 로딩 중, 에러, 정상 데이터의 상태에 따라 placeholder 내용을 결정
     const placeholderText = loading
@@ -17,7 +19,7 @@ export const ResultPage = () => {
 
     return (
         <Styles.Container>
-            <PageBar pageName="진단 결과" />
+            <PageBar pageName="진단 결과" onClick={() => navi("/mypage")}/>
             <Styles.TextContainer>
                 <Text size="s" weight="bold">
                     작성한 답변들로 분석해보았어요
