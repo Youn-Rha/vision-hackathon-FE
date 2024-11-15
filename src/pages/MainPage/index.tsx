@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/Button";
@@ -16,11 +16,9 @@ import * as Styles from "./index.style";
 export const MainPage = () => {
     const navigate = useNavigate();
     const { data: name } = useGetUser();
-    const { id, question, AnsweredToday, answer } = useGetQuestion();
-    const { handleWriteAnswer: writeAnswer } = useWriteAnswer();
+    const { id, question, AnsweredToday, answer, fetchData } = useGetQuestion();
+    const { handleWriteAnswer: writeAnswer, inputRef } = useWriteAnswer();
 
-    const [respond, setRespond] = useState("");
-    const inputRef = useRef<HTMLTextAreaElement | null>(null);
     const [isPopUpOpen, setIsPopUpOpen] = useState(false);
 
     const today = new Date();
@@ -41,16 +39,15 @@ export const MainPage = () => {
         navigate("/main");
     };
     const handlePopUp = useCallback(() => {
+        if (AnsweredToday) return;
         setIsPopUpOpen((prev) => !prev);
-    }, []);
+    }, [AnsweredToday]);
 
-    const handleWriteAnswer = useCallback(() => {
-        if (inputRef.current) {
-            setRespond(inputRef.current.value);
-        }
+    const handleWriteAnswer = useCallback(async () => {
+        await writeAnswer({ questionId: id ?? 0, response: inputRef.current?.value || "" });
+        await fetchData();
         handlePopUp();
-        writeAnswer({ questionId: id, response: respond });
-    }, [handlePopUp]);
+    }, [handlePopUp, writeAnswer, id, fetchData]);
 
     return (
         <Styles.Container>
