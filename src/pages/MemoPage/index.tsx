@@ -1,10 +1,12 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Button } from "../../components/Button";
-import * as Styles from "./index.style";
 import { PageBar } from "../../components/PageBar";
+import * as Styles from "./index.style";
+import { createMemo, getMemosByDate } from "@/apis/memo/memo";
 
 interface Memo {
     date: string;
+    timestamp: string; // 소수점 없는 ISO 형식의 timestamp
     content: string;
 }
 
@@ -12,29 +14,52 @@ export const MemoPage = (): JSX.Element => {
     const [selectedDate, setSelectedDate] = useState<string>("");
     const [currentYear, setCurrentYear] = useState<number>(new Date().getFullYear());
     const [currentMonth, setCurrentMonth] = useState<number>(new Date().getMonth() + 1);
-    const [memos, setMemos] = useState<Memo[]>([
-        {
-            date: "2024-11-13",
-            content: "오늘 건물에서 나오자마자 신호등 신호가 바뀌어서 바로 건널 수 있어 기분이 좋았어요",
-        },
-        { date: "2024-11-13", content: "오늘은 선선한 날씨가 좋아서 짧은 산책을 함." },
-    ]);
+    const [memos, setMemos] = useState<Memo[]>([]); // 모든 메모를 저장할 상태
     const [isPopUpOpen, setIsPopUpOpen] = useState(false);
     const inputRef = useRef<HTMLTextAreaElement | null>(null);
     const calendarRef = useRef<HTMLDivElement | null>(null);
 
-    // 오늘 날짜를 초기 선택 날짜로 설정
+    // 오늘 날짜를 문자열 형식으로 가져오기
+    const today = new Date().toISOString().split("T")[0];
+
+    useEffect(() => {
+        const fetchMemosForMonth = async () => {
+            const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
+            const monthMemos: Memo[] = [];
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = `${currentYear}-${String(currentMonth).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+                const timestamp = new Date(date).toISOString().split(".")[0];
+                try {
+                    const fetchedMemos = await getMemosByDate(timestamp);
+                    fetchedMemos.forEach((memo) => {
+                        monthMemos.push({
+                            date: memo.writtenDateTime.split("T")[0],
+                            timestamp: memo.writtenDateTime.split(".")[0],
+                            content: memo.content,
+                        });
+                    });
+                } catch (error) {
+                    console.error(`Failed to fetch memos for ${date}:`, error);
+                }
+            }
+
+            setMemos(monthMemos);
+        };
+
+        fetchMemosForMonth();
+    }, [currentYear, currentMonth]);
+
+    // 오늘 날짜 설정 및 캘린더 위치 조정
     useEffect(() => {
         const currentDate = new Date();
         const formattedDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, "0")}-${String(currentDate.getDate()).padStart(2, "0")}`;
         setSelectedDate(formattedDate);
-        setCurrentYear(currentDate.getFullYear());
-        setCurrentMonth(currentDate.getMonth() + 1);
 
         // 오늘 날짜 기준으로 스크롤 위치 조정
         const todayIndex = currentDate.getDate() - 1;
         if (calendarRef.current) {
-            const scrollPosition = todayIndex * 70 - 60; // todayIndex 기준으로 스크롤 위치 계산
+            const scrollPosition = todayIndex * 70 - 60;
             calendarRef.current.scrollLeft = scrollPosition > 0 ? scrollPosition : 0;
         }
     }, []);
@@ -45,17 +70,12 @@ export const MemoPage = (): JSX.Element => {
 
     const addMemo = useCallback(async () => {
         if (inputRef.current) {
-            const newMemo: Memo = { date: selectedDate, content: inputRef.current.value };
+            const content = inputRef.current.value;
+            const newMemo = { date: selectedDate, timestamp: new Date().toISOString().split(".")[0], content };
             setMemos((prevMemos) => [...prevMemos, newMemo]);
 
             try {
-                await fetch("/api/memos", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(newMemo),
-                });
+                await createMemo(content);
             } catch (error) {
                 console.error("Failed to save memo:", error);
             }
@@ -96,17 +116,17 @@ export const MemoPage = (): JSX.Element => {
                 <Styles.Calendar ref={calendarRef}>
                     {Array.from({ length: daysInMonth }, (_, i) => i + 1).map((day) => {
                         const date = `${currentYear}-${String(currentMonth).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+                        const memoCount = memos.filter((memo) => memo.date === date).length;
+
                         return (
                             <Styles.DateItem
                                 key={day}
                                 onClick={() => setSelectedDate(date)}
                                 isSelected={selectedDate === date}
-                                isToday={selectedDate === date}
+                                isToday={date === today}
                             >
                                 <span>{day}일</span>
-                                <span className="memo-count">
-                                    {memos.filter((memo) => memo.date === date).length}
-                                </span>
+                                <span className="memo-count">{memoCount}</span>
                             </Styles.DateItem>
                         );
                     })}
@@ -119,14 +139,19 @@ export const MemoPage = (): JSX.Element => {
             </Styles.SelectedDate>
 
             <Styles.MemosContainer>
-                {memos.filter((memo) => memo.date === selectedDate).map((memo, index) => (
-                    <Styles.MemoItem key={index}>{memo.content}</Styles.MemoItem>
-                ))}
+                {memos
+                    .filter((memo) => memo.date === selectedDate)
+                    .map((memo, index) => (
+                        <Styles.MemoItem key={index}>{memo.content}</Styles.MemoItem>
+                    ))}
             </Styles.MemosContainer>
 
-            <Styles.AddButtonWrapper>
-                <Styles.AddButton onClick={handlePopUp}>+</Styles.AddButton>
-            </Styles.AddButtonWrapper>
+            {/* 오늘 날짜인 경우에만 추가 버튼 표시 */}
+            {selectedDate === today && (
+                <Styles.AddButtonWrapper>
+                    <Styles.AddButton onClick={handlePopUp}>+</Styles.AddButton>
+                </Styles.AddButtonWrapper>
+            )}
 
             {isPopUpOpen && (
                 <Styles.PopUpContainer>
