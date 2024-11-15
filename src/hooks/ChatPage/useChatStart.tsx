@@ -24,22 +24,22 @@ export const useChatStart = () => {
         // 사용자의 메시지 추가
         setChatHistory((prevHistory) => [...prevHistory, { variant: "USER", text: userMessage }]);
 
+        const newChatHistory = [...chatHistory, { variant: "USER", text: userMessage }];
+
+        const conversations = [];
+
+        for (let i = 0; i < newChatHistory.length; i += 2) {
+            conversations.push({
+                question: newChatHistory[i].text,
+                response: newChatHistory[i + 1].text,
+                responseDateTime: currentDateTime,
+                type: "chat" as const,
+            });
+        }
+
         // AI의 응답 요청
         try {
-            const response = await startOrContinueChat("chat", [
-                ...chatHistory.map((msg, idx) => ({
-                    question: idx % 2 === 0 ? msg.text : "", // AI 메시지를 question으로 설정
-                    response: idx % 2 !== 0 ? msg.text : "", // 사용자 메시지를 response로 설정
-                    responseDateTime: currentDateTime,
-                    type: "chat" as const,
-                })),
-                {
-                    question: "",
-                    response: userMessage,
-                    responseDateTime: currentDateTime,
-                    type: "chat",
-                },
-            ]);
+            const response = await startOrContinueChat("chat", conversations);
 
             // AI의 응답을 chatHistory에 추가
             setChatHistory((prevHistory) => [...prevHistory, { variant: "AI", text: response.response }]);
