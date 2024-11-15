@@ -27,10 +27,30 @@ export const redirectToKakaoLogin = async (): Promise<string> => {
  * @param code 카카오 인증 후 받은 인가 코드
  * @returns {Promise<{ accessToken: string; refreshToken: string }>}
  */
-export const kakaoLoginCallback = async (code: string): Promise<{ accessToken: string; refreshToken: string }> => {
+export const kakaoLoginCallback_godopu = async (
+    code: string,
+): Promise<{ accessToken: string; refreshToken: string }> => {
     const response = await axiosInstance.get<{ accessToken: string; refreshToken: string }>(
         "/api/auth/oauth/kakao/callback",
         {
+            params: { code },
+        },
+    );
+    const { accessToken, refreshToken } = response.data;
+    useAuthStore.getState().setTokens(accessToken, refreshToken);
+    return response.data;
+};
+
+/** kkia/backapi/site 로 요청하는 코드
+ * Oauth 카카오 로그인 콜백 (GET /api/auth/oauth/kakao/callback)
+ * @param code 카카오 인증 후 받은 인가 코드
+ * @returns {Promise<{ accessToken: string; refreshToken: string }>}
+ */
+export const kakaoLoginCallback_kkia = async (code: string): Promise<{ accessToken: string; refreshToken: string }> => {
+    const response = await axiosInstance.get<{ accessToken: string; refreshToken: string }>(
+        "/api/auth/oauth/kakao/callback",
+        {
+            baseURL: "https://kkia.backapi.site", // 이 요청에서만 baseURL 설정
             params: { code },
         },
     );
