@@ -1,6 +1,6 @@
 import axiosInstance from "../axiosInstance";
 
-interface ChatEntry {
+export interface ChatEntry {
     question: string;
     response: string;
     responseDateTime: string;

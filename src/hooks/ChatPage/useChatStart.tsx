@@ -2,12 +2,12 @@ import { useState, useRef } from "react";
 
 import { startOrContinueChat } from "@/apis/chatbot/chatbot";
 
-interface ChatEntry {
-    question: string;
-    response: string;
-    responseDateTime: string;
-    type: "chat" | "diary";
-}
+// interface ChatEntry {
+//     question: string;
+//     response: string;
+//     responseDateTime: string;
+//     type: "chat" | "diary";
+// }
 
 export const useChatStart = () => {
     const [chatHistory, setChatHistory] = useState<{ variant: "AI" | "USER"; text: string }[]>([
@@ -20,26 +20,25 @@ export const useChatStart = () => {
         if (!userMessage) return;
 
         const currentDateTime = new Date().toISOString();
-        const newEntry: ChatEntry = {
-            question: "",
-            response: userMessage,
-            responseDateTime: currentDateTime,
-            type: "chat",
-        };
 
         // 사용자의 메시지 추가
         setChatHistory((prevHistory) => [...prevHistory, { variant: "USER", text: userMessage }]);
 
-        // AI의 응답을 요청
+        // AI의 응답 요청
         try {
             const response = await startOrContinueChat("chat", [
-                ...chatHistory.map((msg) => ({
-                    question: msg.variant === "AI" ? msg.text : "",
-                    response: msg.variant === "USER" ? msg.text : "",
-                    responseDateTime: new Date().toISOString(),
-                    type: "chat" as const, // 타입을 "chat"으로 단언합니다
+                ...chatHistory.map((msg, idx) => ({
+                    question: idx % 2 === 0 ? msg.text : "", // AI 메시지를 question으로 설정
+                    response: idx % 2 !== 0 ? msg.text : "", // 사용자 메시지를 response로 설정
+                    responseDateTime: currentDateTime,
+                    type: "chat" as const,
                 })),
-                newEntry,
+                {
+                    question: "",
+                    response: userMessage,
+                    responseDateTime: currentDateTime,
+                    type: "chat",
+                },
             ]);
 
             // AI의 응답을 chatHistory에 추가
