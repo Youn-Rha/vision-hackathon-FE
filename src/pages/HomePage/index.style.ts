@@ -18,9 +18,8 @@ interface ContainerProps {
 
 // 애니메이션 스타일이 적용된 컨테이너
 export const Container = styled.div<ContainerProps>`
-    max-width: 400px;
-    height: 100vh;
-    max-height: 956px;
+    max-width: 440px;
+    height: min(100vh, 956px);
     margin: 0 auto;
 
     background-color: var(--color-primary);
@@ -34,4 +33,11 @@ export const Container = styled.div<ContainerProps>`
         css`
             animation: ${fadeOut} 1s ease forwards;
         `}
+`;
+
+export const LogoItem = styled.img`
+    width: 230px;
+    height: 205px;
+
+    border-radius: 15px;
 `;

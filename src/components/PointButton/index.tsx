@@ -19,8 +19,8 @@ export const PointButton = (props: PointButtonProps) => {
 
     const pointList = {
         water: 10,
-        sun: 15,
-        nutrients: 20,
+        sun: 20,
+        nutrients: 40,
     };
 
     const actionList = {

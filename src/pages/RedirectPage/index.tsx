@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { Text } from "@/components/Text/index.tsx";
+
 import { kakaoLoginCallback_kkia } from "../../apis/auth/auth.ts";
 import { useAuthStore } from "../../store.ts";
+import * as Styles from "./index.style.ts";
 
 export const RedirectPage = () => {
     const navigate = useNavigate();
@@ -30,5 +33,11 @@ export const RedirectPage = () => {
         fetchData();
     }, [navigate, setTokens]);
 
-    return <div>카카오 로그인 중입니다…</div>;
+    return (
+        <Styles.Container>
+            <Text size="l" weight="bold" color="black">
+                카카오 로그인 중입니다...
+            </Text>
+        </Styles.Container>
+    );
 };

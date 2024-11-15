@@ -1,6 +1,9 @@
 // HomePage.tsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import mainLogoImg from "@/assets/logo/mainLogo.png";
+
 import * as Styles from "./index.style";
 
 export const HomePage: React.FC = () => {
@@ -25,7 +28,7 @@ export const HomePage: React.FC = () => {
 
     return (
         <Styles.Container fade={fade}>
-            <img src="" alt="LOGO" />
+            <Styles.LogoItem src={mainLogoImg} alt="LOGO" />
         </Styles.Container>
     );
 };
