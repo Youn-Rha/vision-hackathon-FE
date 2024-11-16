@@ -20,15 +20,6 @@ jobs:
       with:
         node-version: '16'
 
-      # node_modules 캐시
-    - name: Cache node_modules
-      uses: actions/cache@v2
-      with:
-        path: ./node_modules
-        key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-modules-
-
       # 의존성 설치 및 빌드
     - name: Install dependencies and build
       run: |
@@ -38,9 +29,18 @@ jobs:
     - name: Install sshpass
       run: sudo apt-get install -y sshpass  # sshpass 설치
 
-    - name: Deploy to Server
+    - name: Deploy to Server - Create Directory
       run: |
         sshpass -p "${{ secrets.PASSWORD }}" ssh -o StrictHostKeyChecking=no -p 16122 rayoen@${{ secrets.HOST }} "mkdir -p /var/www/html/dist"
+    
+    - name: Deploy to Server - Copy Files
+      run: |
         sshpass -p "${{ secrets.PASSWORD }}" scp -o StrictHostKeyChecking=no -P 16122 -r dist/* rayoen@${{ secrets.HOST }}:/var/www/html/dist/
-        sshpass -p "${{ secrets.PASSWORD }}" ssh -o StrictHostKeyChecking=no -p 16122 rayoen@${{ secrets.HOST }} "chmod -R 755 /var/www/html/dist"
-        sshpass -p "${{ secrets.PASSWORD }}" ssh -o StrictHostKeyChecking=no -p 16122 rayoen@${{ secrets.HOST }} "sudo systemctl restart nginx"
+    
+    - name: Deploy to Server - Set Permissions
+      run: |
+       sshpass -p "${{ secrets.PASSWORD }}" ssh -o StrictHostKeyChecking=no -p 16122 rayoen@${{ secrets.HOST }} "chmod -R 755 /var/www/html/dist"
+  
+    - name: Deploy to Server - Restart Nginx
+      run: |
+       sshpass -p "${{ secrets.PASSWORD }}" ssh -o StrictHostKeyChecking=no -p 16122 rayoen@${{ secrets.HOST }} "sudo systemctl restart nginx"
